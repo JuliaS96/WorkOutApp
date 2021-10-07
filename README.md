@@ -29,7 +29,7 @@ did not allow me to alter the workouts or create my own.
 
 ## User Stories
 
-- As a user, I want to be able to simply select a workout program from the workout list
+- As a user, I want to be able to select a workout program from the workout list and *"play"* or *"pause"* it
 - As a user, I want to be able to add my own exercises to the workout repository
 - As a user, I want to be able to delete an exercise from the workout repository
 - As a user, I want to be able to mark an exercises as completed
