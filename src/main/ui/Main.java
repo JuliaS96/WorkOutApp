@@ -2,16 +2,10 @@ package ui;
 
 public class Main {
     public static void main(String[] args) {
+        new WorkOutApp();
 
     }
 
-    //methods to incorporate:
-    // add workout
-    // delete workout
-    // add exercise
-    // delete exercise
-    // select workout
-    // play workout
 
 
 }
