@@ -7,6 +7,10 @@ import model.PersonStats;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// WorkOutApp references code from TellerApp
+// Link: https://github.students.cs.ubc.ca/CPSC210/TellerApp
+// Additional detail provided in the referenced parts
+
 // WorkOut Application
 public class WorkOutApp {
     private Exercise defaultExercise;
