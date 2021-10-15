@@ -25,30 +25,5 @@ class ExerciseTest {
         assertEquals(5, testExercise.getSets());
     }
 
-    @Test
-    void testPerformRep() {
-        testExercise.performRep();
-        assertEquals(9, testExercise.getReps());
-        testExercise.performRep();
-        testExercise.performRep();
-        assertEquals(7, testExercise.getReps());
-        testExerciseLow.performRep();
-        assertEquals(0, testExerciseLow.getReps());
-        testExerciseLow.performRep();
-        assertEquals(0, testExerciseLow.getReps());
-    }
 
-    @Test
-    void testPerformSet() {
-        testExercise.performSet();
-        assertEquals(4, testExercise.getSets());
-        testExercise.performSet();
-        testExercise.performSet();
-        assertEquals(2, testExercise.getSets());
-        testExerciseLow.performSet();
-        assertEquals(0, testExerciseLow.getSets());
-        testExerciseLow.performSet();
-        assertEquals(0, testExerciseLow.getSets());
-
-    }
 }

@@ -3,15 +3,12 @@ package ui;
 import model.Exercise;
 import model.WorkOut;
 import model.PersonStats;
-
-import java.nio.file.LinkPermission;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class WorkOutApp {
     private Exercise crunches;
+    private Exercise defaultExercise;
     private Exercise sitUps;
     private Exercise squats;
     private WorkOut fullBody;
@@ -71,13 +68,14 @@ public class WorkOutApp {
     // EFFECTS: creates exercises and workouts initially available
     private void init() {
         crunches = new Exercise("Crunches",
-                "Lie down and sit half-way up", 8, 3);
+                "Lie down and sit half-way up", 4, 1);
         sitUps = new Exercise("Sit-ups",
-                "Lie down and sit up", 10, 3);
+                "Lie down and sit up", 5, 2);
         squats = new Exercise("Squats",
                 "Sit down as if there is an imaginary chair behind you",
-                12, 3);
-        fullBody = new WorkOut("Full-body Workout");
+                4, 2);
+        defaultExercise = new Exercise("Default Exercise", "Jump! Jump! Jump!", 3, 2);
+        fullBody = new WorkOut("Default Full-Body Workout");
         fullBody.addExercise(crunches);
         fullBody.addExercise(sitUps);
         fullBody.addExercise(squats);
@@ -104,16 +102,17 @@ public class WorkOutApp {
         allWorkouts.add(newWorkout);
         System.out.println("Enter exercise name or press d if done.");
         while (!selection.equals("d")) {
+            Exercise addExercise;
             System.out.println("Enter exercise:");
             String exerciseName = input.next();
             selection = exerciseName;
-            newWorkout.addExercise(squats);
+            addExercise = searchExerciseArray(allExercises, exerciseName);
+            newWorkout.addExercise(addExercise);
             if (selection.equals("d")) {
                 System.out.println("Back to main menu.");
             } else {
                 System.out.println("Exercise added!");
             }
-
         }
 
     }
@@ -138,14 +137,18 @@ public class WorkOutApp {
         System.out.println("Type the name of your Workout:");
         String typedWorkOut = input.next();
         chosenWorkOut = searchWorkOutArray(allWorkouts, typedWorkOut);
-        System.out.println("Starting " + typedWorkOut + "in \n");
+        System.out.println("Starting " + chosenWorkOut.getWorkOutName() + " in \n");
         System.out.println("3...\n");
         System.out.println("2...\n");
         System.out.println("1...\n");
         ArrayList<Exercise> allExercises = chosenWorkOut.getExercises();
         for (int i = 0; i < allExercises.size(); i++) {
             playExercise(allExercises.get(i));
-            System.out.println("Next exercise!");
+            if (i < (allExercises.size() - 1)) {
+                System.out.println("Next exercise!");
+            } else {
+                System.out.println("Great job completing this workout!");
+            }
         }
 
     }
@@ -159,38 +162,55 @@ public class WorkOutApp {
     private WorkOut searchWorkOutArray(ArrayList<WorkOut> workOut, String workOutName) {
         WorkOut chosenOne = fullBody;
         for (int i = 0; i < workOut.size(); i++) {
-            if (workOut.get(i).getWorkOutName() == workOutName) {
-                chosenOne =  workOut.get(i);
-            } else {
-                System.out.println("Invalid choice. Using default workout.");
-
+            if (workOut.get(i).getWorkOutName().equals(workOutName)) {
+                chosenOne = workOut.get(i);
             }
         }
         return chosenOne;
     }
 
-    public void playExercise(Exercise exercise) {
+    private Exercise searchExerciseArray(ArrayList<Exercise> exercise, String exerciseName) {
+        Exercise chosenOne = defaultExercise;
+        for (int i = 0; i < exercise.size(); i++) {
+            if (exercise.get(i).getName().equals(exerciseName)) {
+                chosenOne = exercise.get(i);
+            }
+        }
+        return chosenOne;
+
+    }
+
+    private void playExercise(Exercise exercise) {
         System.out.println(exercise.getDescription());
-        int rp = exercise.getReps();
         int st = exercise.getSets();
         System.out.println("Starting first set of " + exercise.getName() + "!");
-        for(int i = 0; i < exercise.getReps(); i++) {
-            System.out.println("Perform 1 rep of " + exercise.getName() + ".");
-            System.out.println("Press n when done or q to quit.");
-            String nextRep = input.next();
-            if (nextRep.equals("n")) {
+        for (int j = 0; j < exercise.getSets(); j++) {
+            int rp = exercise.getReps();
+            for (int i = 0; i < exercise.getReps(); i++) {
+                playExerciseHelper(exercise, rp, i);
                 rp = rp - 1;
-                System.out.println((i + 1) + " reps done, " + rp + " reps left.");
-            } else if (nextRep.equals("q")) {
-                System.out.println("Better luck next time!");
-                java.lang.System.exit(0);
-
             }
+            System.out.println((j + 1) + " sets done! " + (st - j - 1) + " sets left!");
+            if ((st - j - 1) == 0) {
+                System.out.println("All sets done.");
+            } else {
+                System.out.println("Starting next set...");
+            }
+        }
+    }
 
-
+    private void playExerciseHelper(Exercise exercise, int rp, int i) {
+        System.out.println("Perform 1 rep of " + exercise.getName() + ".");
+        System.out.println("Press any key when done or q to quit.");
+        String nextRep = input.next();
+        if (nextRep.equals("q")) {
+            System.out.println("Better luck next time!");
+            java.lang.System.exit(0);
+        } else {
+            rp = rp - 1;
+            System.out.println((i + 1) + " reps done, " + rp + " reps left.");
 
         }
-
     }
 
 

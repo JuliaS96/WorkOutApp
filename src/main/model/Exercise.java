@@ -24,25 +24,6 @@ public class Exercise {
         this.sets = sets;
     }
 
-    // REQUIRES: reps >= 0
-    // MODIFIES: this
-    // EFFECTS: one rep is removed from the remaining reps
-    public int performRep() {
-        if (reps > 0) {
-            reps = reps - 1;
-        }
-        return reps;
-    }
-
-    // REQUIRES: sets >= 0
-    // MODIFIES: this
-    // EFFECTS: one set is removed from the remaining sets
-    public int performSet() {
-        if (sets > 0) {
-            sets = sets - 1;
-        }
-        return sets;
-    }
 
     public String getName() {
         return exerciseName;

@@ -34,6 +34,10 @@ public class WorkOut {
         exercises.remove(exerciseName);
     }
 
+    public void getWorkOutDifficulty(){
+
+    }
+
     public String getWorkOutName() {
         return workOutName;
     }
