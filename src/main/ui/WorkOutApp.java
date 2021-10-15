@@ -17,8 +17,8 @@ public class WorkOutApp {
     private WorkOut fullBody;
     private Scanner input;
     private PersonStats personStats = new PersonStats();
-    private ArrayList allWorkouts = new ArrayList();
-    private ArrayList allExercises = new ArrayList();
+    private ArrayList<WorkOut> allWorkouts = new ArrayList();
+    private ArrayList<Exercise> allExercises = new ArrayList();
 
     // EFFECTS: runs the WorkOut application
     public WorkOutApp() {
@@ -100,8 +100,8 @@ public class WorkOutApp {
         String selection = "";
         System.out.println("Enter workout name: ");
         String workoutName = input.next();
-        allWorkouts.add(workoutName);
         WorkOut newWorkout = new WorkOut(workoutName);
+        allWorkouts.add(newWorkout);
         System.out.println("Enter exercise name or press d if done.");
         while (!selection.equals("d")) {
             System.out.println("Enter exercise:");
@@ -137,20 +137,60 @@ public class WorkOutApp {
         WorkOut chosenWorkOut;
         System.out.println("Type the name of your Workout:");
         String typedWorkOut = input.next();
-        System.out.println("Starting " + chosenWorkout + "in \n");
+        chosenWorkOut = searchWorkOutArray(allWorkouts, typedWorkOut);
+        System.out.println("Starting " + typedWorkOut + "in \n");
         System.out.println("3...\n");
         System.out.println("2...\n");
         System.out.println("1...\n");
-        chosenWorkOut = allWorkouts.get(0);
-
-
-
+        ArrayList<Exercise> allExercises = chosenWorkOut.getExercises();
+        for (int i = 0; i < allExercises.size(); i++) {
+            playExercise(allExercises.get(i));
+            System.out.println("Next exercise!");
+        }
 
     }
+
     // prints stats of the person
     private void seeStats() {
         System.out.println("You have completed " + personStats.getCompletedWorkouts() + " workouts.");
         System.out.println("You have completed " + personStats.getCompletedReps() + " reps.");
+    }
+
+    private WorkOut searchWorkOutArray(ArrayList<WorkOut> workOut, String workOutName) {
+        WorkOut chosenOne = fullBody;
+        for (int i = 0; i < workOut.size(); i++) {
+            if (workOut.get(i).getWorkOutName() == workOutName) {
+                chosenOne =  workOut.get(i);
+            } else {
+                System.out.println("Invalid choice. Using default workout.");
+
+            }
+        }
+        return chosenOne;
+    }
+
+    public void playExercise(Exercise exercise) {
+        System.out.println(exercise.getDescription());
+        int rp = exercise.getReps();
+        int st = exercise.getSets();
+        System.out.println("Starting first set of " + exercise.getName() + "!");
+        for(int i = 0; i < exercise.getReps(); i++) {
+            System.out.println("Perform 1 rep of " + exercise.getName() + ".");
+            System.out.println("Press n when done or q to quit.");
+            String nextRep = input.next();
+            if (nextRep.equals("n")) {
+                rp = rp - 1;
+                System.out.println((i + 1) + " reps done, " + rp + " reps left.");
+            } else if (nextRep.equals("q")) {
+                System.out.println("Better luck next time!");
+                java.lang.System.exit(0);
+
+            }
+
+
+
+        }
+
     }
 
 
@@ -159,6 +199,7 @@ public class WorkOutApp {
     private void deleteWorkout() {
 
     }
+
     // !!!
     // to be added in next phase
     private void deleteExercise() {

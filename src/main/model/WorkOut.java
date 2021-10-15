@@ -13,7 +13,7 @@ import model.Exercise;
 
 public class WorkOut {
     private String workOutName;        // the name of the Workout
-    private ArrayList exercises;       // a list of Exercises
+    private ArrayList<Exercise> exercises;       // a list of Exercises
 
     public WorkOut(String name) {
         workOutName = name;
