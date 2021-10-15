@@ -3,7 +3,8 @@ package model;
 // an exercise contains:
 // - a name
 // - description
-// - how many repetitions and sets
+// - number of repetitions and
+// - number of sets
 
 public class Exercise {
     private String exerciseName;       // the name of the exercise

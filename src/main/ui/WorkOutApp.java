@@ -6,6 +6,7 @@ import model.PersonStats;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// WorkOut Application
 public class WorkOutApp {
     private Exercise defaultExercise;
     private WorkOut fullBody;
@@ -43,7 +44,7 @@ public class WorkOutApp {
         System.out.println("\n Workout Terminated.");
     }
 
-    // Code used from init() in Teller App Code and modified as needed
+    // Code used from processCommand() in Teller App Code and modified as needed
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
@@ -80,6 +81,7 @@ public class WorkOutApp {
         input.useDelimiter("\n");
     }
 
+    // Code used from displayMenu() in Teller App Code and modified as needed
     // EFFECTS: Display menu to user
     private void displayMenu() {
         System.out.println("\nSelect from:");
@@ -90,7 +92,7 @@ public class WorkOutApp {
         System.out.println("\tq -> quit");
     }
 
-    // REQUIRES: Exercises added to workout must be in the allExercises Array
+    // REQUIRES: Exercises added to Workout must be in the allExercises Array
     // MODIFIES: allWorkouts Array
     // EFFECTS: creates a new Workout and adds it to the allWorkouts Array
     private void addWorkout() {

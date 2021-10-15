@@ -1,10 +1,6 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.*;
-import model.Exercise;
-
 
 // Represents a full workout
 // a Workout contains:
