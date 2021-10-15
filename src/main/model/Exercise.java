@@ -28,12 +28,12 @@ public class Exercise {
     // EFFECTS: calculated the difficulty of the exercise
     public String exerciseDifficulty() {
         int calc = this.reps * this.sets;
-        String output = "";
+        String output;
         if (calc < 15) {
             output = "Easy";
         } else if (calc < 30) {
             output = "Moderate";
-        } else if (calc >= 30) {
+        } else {
             output = "Difficult";
         }
         return output;
