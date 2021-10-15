@@ -33,3 +33,5 @@ did not allow me to alter the workouts or create my own.
 - As a user, I want to be able to add my own exercises to the exercise repository
 - As a user, I want to be able to build my own workouts and add it to the workout repository
 - As a user, I want to be able to see the number of completed workouts and reps
+- As a user, I want to be able to see all the workouts available to me
+- As a user, I want to be able to see all the exercises available to me

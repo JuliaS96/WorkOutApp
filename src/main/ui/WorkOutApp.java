@@ -3,6 +3,7 @@ package ui;
 import model.Exercise;
 import model.WorkOut;
 import model.PersonStats;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,6 +57,10 @@ public class WorkOutApp {
             seeStats();
         } else if (command.equals("d")) {
             startWorkout();
+        } else if (command.equals("e")) {
+            displayAllWorkouts();
+        } else if (command.equals("f")) {
+            displayAllExercises();
         } else {
             System.out.println("Please select valid input.");
         }
@@ -77,6 +82,10 @@ public class WorkOutApp {
         fullBody.addExercise(crunches);
         fullBody.addExercise(sitUps);
         fullBody.addExercise(squats);
+        allWorkouts.add(fullBody);
+        allExercises.add(squats);
+        allExercises.add(crunches);
+        allExercises.add(sitUps);
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -89,6 +98,8 @@ public class WorkOutApp {
         System.out.println("\tb -> add exercise");
         System.out.println("\tc -> see stats");
         System.out.println("\td -> start workout");
+        System.out.println("\te -> display all workouts");
+        System.out.println("\tf -> display all exercises");
         System.out.println("\tq -> quit");
     }
 
@@ -217,11 +228,11 @@ public class WorkOutApp {
             }
         }
     }
+
     // REQUIRES: rp > 0 and i > 0
     // MODIFIES: personStats
     // EFFECTS: helper function for playExercise. Starts playing the chosen exercise.
     //          Adds one to reps in PersonStats with each completed rep.
-
     private void playExerciseHelper(Exercise exercise, int rp, int i) {
         System.out.println("Perform 1 rep of " + exercise.getName() + ".");
         System.out.println("Press any key when done or q to quit.");
@@ -234,6 +245,22 @@ public class WorkOutApp {
             System.out.println((i + 1) + " reps done, " + rp + " reps left.");
             personStats.addCompletedReps();
 
+        }
+    }
+
+    // EFFECTS: allows you to view the names of available exercises
+    private void displayAllExercises() {
+        System.out.println("Exercises available:");
+        for (int i = 0; i < allExercises.size(); i++) {
+            System.out.println(allExercises.get(i).getName());
+        }
+    }
+
+    // EFFECTS: allows you to view the names of available workouts
+    private void displayAllWorkouts() {
+        System.out.println("Workouts available:");
+        for (int i = 0; i < allWorkouts.size(); i++) {
+            System.out.println(allWorkouts.get(i).getWorkOutName());
         }
     }
 
