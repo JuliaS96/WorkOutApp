@@ -31,5 +31,5 @@ did not allow me to alter the workouts or create my own.
 
 - As a user, I want to be able to select a workout program from the workout list and *"play"* it
 - As a user, I want to be able to add my own exercises to the exercise repository
-- As a user, I want to be able to build my own workout and add it to the repository
+- As a user, I want to be able to build my own workouts and add it to the workout repository
 - As a user, I want to be able to see the number of completed workouts and reps
