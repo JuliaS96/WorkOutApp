@@ -14,9 +14,8 @@ public class Exercise {
     // REQUIRES: name and description have non-zero length AND
     // reps and sets are positive integers
     // EFFECTS: name of exercise is set to name
-    //          description of exercise is set to description
-    //          number of reps are set to reps
-    //          number of sets are set to sets
+    //        description of exercise is set to description
+    //        number of reps are set to reps
     public Exercise(String name, String description, int reps, int sets) {
         exerciseName = name;
         this.description = description;
@@ -24,6 +23,21 @@ public class Exercise {
         this.sets = sets;
     }
 
+    // REQUIRES: positive numbers of sets and reps
+    // MODIFIES: string producing output
+    // EFFECTS: calculated the difficulty of the exercise
+    public String exerciseDifficulty() {
+        int calc = this.reps * this.sets;
+        String output = "";
+        if (calc < 15) {
+            output = "Easy";
+        } else if (calc < 30) {
+            output = "Moderate";
+        } else if (calc >= 30) {
+            output = "Difficult";
+        }
+        return output;
+    }
 
     public String getName() {
         return exerciseName;

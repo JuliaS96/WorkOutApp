@@ -147,6 +147,7 @@ public class WorkOutApp {
             if (i < (allExercises.size() - 1)) {
                 System.out.println("Next exercise!");
             } else {
+                personStats.addCompletedWorkout();
                 System.out.println("Great job completing this workout!");
             }
         }
@@ -184,6 +185,7 @@ public class WorkOutApp {
         System.out.println(exercise.getDescription());
         int st = exercise.getSets();
         System.out.println("Starting first set of " + exercise.getName() + "!");
+        System.out.println("This exercise is: " + exercise.exerciseDifficulty() + ".");
         for (int j = 0; j < exercise.getSets(); j++) {
             int rp = exercise.getReps();
             for (int i = 0; i < exercise.getReps(); i++) {
@@ -193,6 +195,7 @@ public class WorkOutApp {
             System.out.println((j + 1) + " sets done! " + (st - j - 1) + " sets left!");
             if ((st - j - 1) == 0) {
                 System.out.println("All sets done.");
+
             } else {
                 System.out.println("Starting next set...");
             }
@@ -209,6 +212,7 @@ public class WorkOutApp {
         } else {
             rp = rp - 1;
             System.out.println((i + 1) + " reps done, " + rp + " reps left.");
+            personStats.addCompletedReps();
 
         }
     }

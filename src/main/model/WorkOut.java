@@ -27,16 +27,13 @@ public class WorkOut {
         exercises.add(exerciseName);
     }
 
-    // REQUIRES: exerciseName is in the Workout
-    // MODIFIES: this
-    // EFFECTS: removes all instances of exercise from workout
-    public void removeExercise(Exercise exerciseName) {
-        exercises.remove(exerciseName);
-    }
-
-    public void getWorkOutDifficulty(){
-
-    }
+//    // REQUIRES: exerciseName is in the Workout
+//    // MODIFIES: this
+//    // EFFECTS: removes all instances of exercise from workout
+//    public void removeExercise(Exercise exerciseName) {
+//        exercises.remove(exerciseName);
+//    }
+//
 
     public String getWorkOutName() {
         return workOutName;
