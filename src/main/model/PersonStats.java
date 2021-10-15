@@ -13,10 +13,14 @@ public class PersonStats {
         completedReps = 0;
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a workout to completed workouts
     public void addCompletedWorkout() {
         completedWorkouts = completedWorkouts + 1;
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a rep to completed reps
     public void addCompletedReps() {
         completedReps = completedReps + 1;
     }

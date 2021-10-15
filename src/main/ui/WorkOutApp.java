@@ -7,15 +7,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WorkOutApp {
-    private Exercise crunches;
     private Exercise defaultExercise;
-    private Exercise sitUps;
-    private Exercise squats;
     private WorkOut fullBody;
     private Scanner input;
     private PersonStats personStats = new PersonStats();
-    private ArrayList<WorkOut> allWorkouts = new ArrayList();
-    private ArrayList<Exercise> allExercises = new ArrayList();
+    private ArrayList<WorkOut> allWorkouts = new ArrayList<>();
+    private ArrayList<Exercise> allExercises = new ArrayList<>();
 
     // EFFECTS: runs the WorkOut application
     public WorkOutApp() {
@@ -24,10 +21,10 @@ public class WorkOutApp {
 
     // Code used from runTeller() in Teller App Code and modified as needed
     // MODIFIES: this
-    // EFFECTS:
+    // EFFECTS: processes user input
     private void runWorkOutApp() {
         boolean keepGoing = true;
-        String command = null;
+        String command;
 
         init();
 
@@ -65,13 +62,13 @@ public class WorkOutApp {
 
     // Code used from init() in Teller App Code and modified as needed
     // MODIFIES: this
-    // EFFECTS: creates exercises and workouts initially available
+    // EFFECTS: initializes default exercises and workout
     private void init() {
-        crunches = new Exercise("Crunches",
+        Exercise crunches = new Exercise("Crunches",
                 "Lie down and sit half-way up", 4, 1);
-        sitUps = new Exercise("Sit-ups",
+        Exercise sitUps = new Exercise("Sit-ups",
                 "Lie down and sit up", 5, 2);
-        squats = new Exercise("Squats",
+        Exercise squats = new Exercise("Squats",
                 "Sit down as if there is an imaginary chair behind you",
                 4, 2);
         defaultExercise = new Exercise("Default Exercise", "Jump! Jump! Jump!", 3, 2);
@@ -83,7 +80,7 @@ public class WorkOutApp {
         input.useDelimiter("\n");
     }
 
-    // Display menu to user
+    // EFFECTS: Display menu to user
     private void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\ta -> add workout");
@@ -93,7 +90,9 @@ public class WorkOutApp {
         System.out.println("\tq -> quit");
     }
 
-    // REQUIRED: Must add valid entries to workout
+    // REQUIRES: Exercises added to workout must be in the allExercises Array
+    // MODIFIES: allWorkouts Array
+    // EFFECTS: creates a new Workout and adds it to the allWorkouts Array
     private void addWorkout() {
         String selection = "";
         System.out.println("Enter workout name: ");
@@ -117,6 +116,9 @@ public class WorkOutApp {
 
     }
 
+    // REQUIRES: exercise name and description must be strings; reps and sets must be positive integers
+    // MODIFIES: allExercises Array
+    // EFFECTS: creates a new Exercise and adds it to the allExercises Array
     private void addExercise() {
         Exercise exercise;
         System.out.println("Enter exercise name:");
@@ -132,6 +134,10 @@ public class WorkOutApp {
         System.out.println("Exercise added to directory!");
     }
 
+    // MODIFIES: personStats
+    // EFFECTS: starts chosen workout. If the workout typed is not in allWorkouts
+    //          array, then it will start the default workouts.
+    //          Once completed, a workout is added to the personStats
     private void startWorkout() {
         WorkOut chosenWorkOut;
         System.out.println("Type the name of your Workout:");
@@ -141,7 +147,8 @@ public class WorkOutApp {
         System.out.println("3...\n");
         System.out.println("2...\n");
         System.out.println("1...\n");
-        ArrayList<Exercise> allExercises = chosenWorkOut.getExercises();
+        ArrayList<Exercise> allExercises;
+        allExercises = chosenWorkOut.getExercises();
         for (int i = 0; i < allExercises.size(); i++) {
             playExercise(allExercises.get(i));
             if (i < (allExercises.size() - 1)) {
@@ -154,33 +161,40 @@ public class WorkOutApp {
 
     }
 
-    // prints stats of the person
+    // EFFECTS: prints out the number of completed Workouts and Reps
     private void seeStats() {
         System.out.println("You have completed " + personStats.getCompletedWorkouts() + " workouts.");
         System.out.println("You have completed " + personStats.getCompletedReps() + " reps.");
     }
 
+    // EFFECTS: searches the allWorkouts array and produces the workout.
+    //          If it is not in the array, it produces the default workout.
     private WorkOut searchWorkOutArray(ArrayList<WorkOut> workOut, String workOutName) {
         WorkOut chosenOne = fullBody;
-        for (int i = 0; i < workOut.size(); i++) {
-            if (workOut.get(i).getWorkOutName().equals(workOutName)) {
-                chosenOne = workOut.get(i);
+        for (WorkOut out : workOut) {
+            if (out.getWorkOutName().equals(workOutName)) {
+                chosenOne = out;
             }
         }
         return chosenOne;
     }
 
+    // EFFECTS: searches the exercise array and produces the exercise.
+    //          If it is not in the array, it produces the default exercise.
     private Exercise searchExerciseArray(ArrayList<Exercise> exercise, String exerciseName) {
         Exercise chosenOne = defaultExercise;
-        for (int i = 0; i < exercise.size(); i++) {
-            if (exercise.get(i).getName().equals(exerciseName)) {
-                chosenOne = exercise.get(i);
+        for (Exercise value : exercise) {
+            if (value.getName().equals(exerciseName)) {
+                chosenOne = value;
             }
         }
         return chosenOne;
 
     }
 
+    // MODIFIES: personStats
+    // EFFECTS: starts playing the chosen exercise. Adds one to reps in
+    //          PersonStats with each completed rep.
     private void playExercise(Exercise exercise) {
         System.out.println(exercise.getDescription());
         int st = exercise.getSets();
@@ -201,6 +215,10 @@ public class WorkOutApp {
             }
         }
     }
+    // REQUIRES: rp > 0 and i > 0
+    // MODIFIES: personStats
+    // EFFECTS: helper function for playExercise. Starts playing the chosen exercise.
+    //          Adds one to reps in PersonStats with each completed rep.
 
     private void playExerciseHelper(Exercise exercise, int rp, int i) {
         System.out.println("Perform 1 rep of " + exercise.getName() + ".");
@@ -217,18 +235,17 @@ public class WorkOutApp {
         }
     }
 
-
-    // !!!
-    // to be added in next phase
-    private void deleteWorkout() {
-
-    }
-
-    // !!!
-    // to be added in next phase
-    private void deleteExercise() {
-
-    }
+//    // !!!
+//    // to be added in next phase
+//    private void deleteWorkout() {
+//
+//    }
+//
+//    // !!!
+//    // to be added in next phase
+//    private void deleteExercise() {
+//
+//    }
 
 }
 
