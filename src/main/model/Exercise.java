@@ -25,7 +25,6 @@ public class Exercise {
     }
 
     // REQUIRES: positive numbers of sets and reps
-    // MODIFIES: string producing output
     // EFFECTS: calculated the difficulty of the exercise
     public String exerciseDifficulty() {
         int calc = this.reps * this.sets;

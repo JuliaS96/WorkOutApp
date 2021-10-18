@@ -35,3 +35,6 @@ did not allow me to alter the workouts or create my own.
 - As a user, I want to be able to see the number of completed workouts and reps
 - As a user, I want to be able to see all the workouts available to me
 - As a user, I want to be able to see all the exercises available to me
+- As a user, I want to be able to save my workouts, exercises and personal stats to a file
+- As a user, I want to be able to retrieve my workouts, exercises and personal stats from a file
+
