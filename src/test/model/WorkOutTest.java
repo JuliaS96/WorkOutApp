@@ -31,20 +31,20 @@ class WorkOutTest {
 
     @Test
     void testConstructor() {
-        assertEquals(testWorkout.getWorkOutName(), "Full-body Work Out");
+        assertEquals("Full-body Work Out", testWorkout.getWorkOutName() );
         assertTrue(testWorkout.getExercises().isEmpty());
     }
 
     @Test
     void testAddExercise() {
         testWorkout.addExercise(sitUps);
-        assertEquals(testWorkout.getExercises().get(0), sitUps);
-        assertEquals(testWorkout.getExercises().size(),1);
+        assertEquals(sitUps, testWorkout.getExercises().get(0));
+        assertEquals(1, testWorkout.getExercises().size());
         testWorkout.addExercise(crunches);
         testWorkout.addExercise(squats);
-        assertEquals(testWorkout.getExercises().get(1), crunches);
-        assertEquals(testWorkout.getExercises().get(2), squats);
-        assertEquals(testWorkout.getExercises().size(),3);
+        assertEquals(crunches, testWorkout.getExercises().get(1) );
+        assertEquals(squats, testWorkout.getExercises().get(2));
+        assertEquals(3, testWorkout.getExercises().size());
 
     }
 
@@ -52,20 +52,20 @@ class WorkOutTest {
     void testToJson()  {
         testWorkout.addExercise(crunches);
         testWorkout.addExercise(squats);
-        assertEquals(testWorkout.toJson().get("name"), "Full-body Work Out");
+        assertEquals("Full-body Work Out", testWorkout.toJson().get("name"));
         JSONArray exercises = testWorkout.toJson().getJSONArray("exercises");
-        assertEquals(exercises.length(),2);
+        assertEquals(2, exercises.length());
         JSONObject exercise1 = (JSONObject) exercises.get(0);
         JSONObject exercise2 = (JSONObject) exercises.get(1);
-        assertEquals(exercise1.get("name"),"Crunches");
-        assertEquals(exercise2.get("name"),"Squats");
-        assertEquals(exercise1.get("description"),"Lie down and sit half-way up");
-        assertEquals(exercise2.get("description"),
-                "Sit down as if there is an imaginary chair behind you");
-        assertEquals(exercise1.get("sets"),3);
-        assertEquals(exercise2.get("sets"),3);
-        assertEquals(exercise1.get("reps"),8);
-        assertEquals(exercise2.get("reps"),12);
+        assertEquals("Crunches", exercise1.get("name"));
+        assertEquals(("Squats"), exercise2.get("name"));
+        assertEquals("Lie down and sit half-way up", exercise1.get("description"));
+        assertEquals("Sit down as if there is an imaginary chair behind you",
+                exercise2.get("description"));
+        assertEquals(3, exercise1.get("sets"));
+        assertEquals(3, exercise2.get("sets"));
+        assertEquals(8, exercise1.get("reps"));
+        assertEquals(12, exercise2.get("reps"));
 
     }
 

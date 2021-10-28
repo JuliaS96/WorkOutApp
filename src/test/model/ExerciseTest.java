@@ -79,9 +79,9 @@ class ExerciseTest {
 
     @Test
     void testToJson()  {
-        assertEquals(testExercise.toJson().get("name"), "Sit-ups");
-        assertEquals(testExercise.toJson().get("description"), "Lie down and sit up");
-        assertEquals(testExercise.toJson().get("reps"), 10);
-        assertEquals(testExercise.toJson().get("sets"), 5);
+        assertEquals("Sit-ups", testExercise.toJson().get("name"));
+        assertEquals("Lie down and sit up", testExercise.toJson().get("description"));
+        assertEquals(10, testExercise.toJson().get("reps"));
+        assertEquals(5, testExercise.toJson().get("sets"));
     }
 }

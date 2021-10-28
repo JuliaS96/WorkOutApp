@@ -60,12 +60,12 @@ class PersonStatsTest {
 
     @Test
     void testToJson()  {
-        assertEquals(testPersonStats.toJson().get("Reps"), 0);
-        assertEquals(testPersonStats.toJson().get("WorkOuts"), 0);
+        assertEquals(0, testPersonStats.toJson().get("Reps"));
+        assertEquals(0, testPersonStats.toJson().get("WorkOuts"));
         testPersonStats.setCompletedWorkOuts(10);
         testPersonStats.setCompletedReps(6);
-        assertEquals(testPersonStats.toJson().get("Reps"), 6);
-        assertEquals(testPersonStats.toJson().get("WorkOuts"), 10);
+        assertEquals(6, testPersonStats.toJson().get("Reps"));
+        assertEquals(10, testPersonStats.toJson().get("WorkOuts"));
     }
 
 
