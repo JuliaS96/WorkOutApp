@@ -51,7 +51,7 @@ public class JsonReader {
         return data;
     }
 
-    // MODIFIES: wr
+    // MODIFIES: AllWorkOutData
     // EFFECTS: parses thingies from JSON object and adds them to workroom
     private void addWorkOutData(AllWorkOutData data, JSONObject jsonObject) {
         JSONArray jsonArrayPS = jsonObject.getJSONArray("Personal Stats");
@@ -77,7 +77,7 @@ public class JsonReader {
         data.updateWO(workOuts);
     }
 
-    // MODIFIES: wr
+    // MODIFIES: AllWorkOutData
     // EFFECTS: parses thingy from JSON object and adds it to workroom
     private void addPersonStats(AllWorkOutData data, JSONObject jsonObject) {
         int reps = jsonObject.getInt("Reps");
@@ -85,6 +85,8 @@ public class JsonReader {
         data.updatePS(reps, workOuts);
     }
 
+
+    // EFFECTS: makes a workout from the json array
     private WorkOut makeWorkout(JSONObject jsonObject) {
         WorkOut workOut1;
         String name = jsonObject.getString("name");
@@ -98,6 +100,7 @@ public class JsonReader {
         return workOut1;
     }
 
+    // EFFECTS: makes an exercise from the json array
     private Exercise makeExercise(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         String description = jsonObject.getString("description");

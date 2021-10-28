@@ -6,7 +6,6 @@ import model.WorkOut;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -17,7 +16,7 @@ public class JsonWriterTest {
     @Test
     void testWriterInvalidFile() {
         try {
-            AllWorkOutData wr = new AllWorkOutData();
+            AllWorkOutData data = new AllWorkOutData();
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             fail("IOException was expected");
