@@ -24,7 +24,7 @@ public class JsonReaderTest {
     }
     @Test
     void testReaderEmptyData() {
-        JsonReader reader = new JsonReader("./data/emptyTestData.json");
+        JsonReader reader = new JsonReader("./data/emptyTestDataReader.json");
         try {
             AllWorkOutData data = reader.read();
             assertEquals(0, data.getPersonStats().getCompletedWorkouts());
@@ -64,7 +64,7 @@ public class JsonReaderTest {
 
     @Test
     void testReaderUpdatedData() {
-        JsonReader reader = new JsonReader("./data/updatedData.json");
+        JsonReader reader = new JsonReader("./data/updatedTestDataReader.json");
         try {
             AllWorkOutData data = reader.read();
             WorkOut workOut1 = (WorkOut) data.getWorkouts().get(1);
