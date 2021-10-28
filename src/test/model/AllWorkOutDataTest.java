@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -85,6 +86,48 @@ public class AllWorkOutDataTest {
 
         data.updateWO(workouts);
         assertEquals(0, data.getWorkouts().size());
+
+    }
+
+    @Test
+    void testToJson()  {
+        data.updateEx(exercises2);
+        data.updateWO(workouts2);
+        data.updatePS(3,4);
+        data.toJson();
+
+        JSONArray stats = data.toJson().getJSONArray("Personal Stats");
+        JSONArray workOuts = data.toJson().getJSONArray("WorkOuts");
+        JSONArray exercises = data.toJson().getJSONArray("Exercises");
+
+        assertEquals(stats.length(),1);
+        assertEquals(workOuts.length(), 2);
+        assertEquals(exercises.length(), 2);
+
+    }
+
+    @Test
+    void testPersonStatsToJson()  {
+        data.updatePS(3,4);
+        data.toJson();
+        JSONArray stats = data.toJson().getJSONArray("Personal Stats");
+        assertEquals(stats.length(),1);
+    }
+
+    @Test
+    void testWorkoutsToJson()  {
+        data.updateWO(workouts2);
+        data.toJson();
+        JSONArray workOuts = data.toJson().getJSONArray("WorkOuts");
+        assertEquals(workOuts.length(),2);
+    }
+
+    @Test
+    void testExercisesToJson()  {
+        data.updateEx(exercises2);
+        data.toJson();
+        JSONArray exercises = data.toJson().getJSONArray("Exercises");
+        assertEquals(exercises.length(),2);
 
     }
 

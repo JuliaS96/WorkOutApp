@@ -58,6 +58,16 @@ class PersonStatsTest {
         assertEquals(0, testPersonStats.getCompletedWorkouts());
     }
 
+    @Test
+    void testToJson()  {
+        assertEquals(testPersonStats.toJson().get("Reps"), 0);
+        assertEquals(testPersonStats.toJson().get("WorkOuts"), 0);
+        testPersonStats.setCompletedWorkOuts(10);
+        testPersonStats.setCompletedReps(6);
+        assertEquals(testPersonStats.toJson().get("Reps"), 6);
+        assertEquals(testPersonStats.toJson().get("WorkOuts"), 10);
+    }
+
 
 
 
