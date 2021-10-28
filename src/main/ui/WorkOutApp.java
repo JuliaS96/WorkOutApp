@@ -5,6 +5,7 @@ import model.Exercise;
 import model.WorkOut;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -136,12 +137,12 @@ public class WorkOutApp {
             System.out.println("Enter exercise:");
             String exerciseName = input.next();
             selection = exerciseName;
-            addExercise = searchExerciseArray(data.getExercises(), exerciseName);
-            newWorkout.addExercise(addExercise);
             if (selection.equals("d")) {
                 System.out.println("Back to main menu.");
             } else {
-                System.out.println("Exercise added!");
+                addExercise = searchExerciseArray(data.getExercises(), exerciseName);
+                newWorkout.addExercise(addExercise);
+                System.out.println("Exercise added if it is in directory!");
             }
         }
 
