@@ -1,0 +1,86 @@
+{
+    "Personal Stats": [{
+        "Reps": 22,
+        "WorkOuts": 1
+    }],
+    "Exercises": [
+        {
+            "reps": 4,
+            "sets": 2,
+            "name": "Squats",
+            "description": "Sit down as if there is an imaginary chair behind you"
+        },
+        {
+            "reps": 4,
+            "sets": 1,
+            "name": "Crunches",
+            "description": "Lie down and sit half-way up"
+        },
+        {
+            "reps": 5,
+            "sets": 2,
+            "name": "Sit-ups",
+            "description": "Lie down and sit up"
+        },
+        {
+            "reps": 1,
+            "sets": 2,
+            "name": "jj",
+            "description": "jj"
+        },
+        {
+            "reps": 6,
+            "sets": 7,
+            "name": "jj",
+            "description": "jj"
+        }
+    ],
+    "WorkOuts": [
+        {
+            "exercises": [
+                {
+                    "reps": 4,
+                    "sets": 1,
+                    "name": "Crunches",
+                    "description": "Lie down and sit half-way up"
+                },
+                {
+                    "reps": 5,
+                    "sets": 2,
+                    "name": "Sit-ups",
+                    "description": "Lie down and sit up"
+                },
+                {
+                    "reps": 4,
+                    "sets": 2,
+                    "name": "Squats",
+                    "description": "Sit down as if there is an imaginary chair behind you"
+                }
+            ],
+            "name": "Default Full-Body Workout"
+        },
+        {
+            "exercises": [
+                {
+                    "reps": 6,
+                    "sets": 7,
+                    "name": "jj",
+                    "description": "jj"
+                },
+                {
+                    "reps": 6,
+                    "sets": 7,
+                    "name": "jj",
+                    "description": "jj"
+                },
+                {
+                    "reps": 3,
+                    "sets": 2,
+                    "name": "Default Exercise",
+                    "description": "Jump! Jump! Jump!"
+                }
+            ],
+            "name": "gg"
+        }
+    ]
+}

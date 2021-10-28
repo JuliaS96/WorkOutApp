@@ -1,9 +1,12 @@
 package ui;
 
+import model.AllWorkOutData;
 import model.Exercise;
 import model.WorkOut;
-import model.PersonStats;
-
+import persistence.JsonReader;
+import persistence.JsonWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,16 +16,20 @@ import java.util.Scanner;
 
 // WorkOut Application
 public class WorkOutApp {
+    private static final String JSON_STORE = "./data/workoutData.json";
     private Exercise defaultExercise;
     private WorkOut fullBody;
     private Scanner input;
-    private PersonStats personStats = new PersonStats();
-    private ArrayList<WorkOut> allWorkouts = new ArrayList<>();
-    private ArrayList<Exercise> allExercises = new ArrayList<>();
+    private AllWorkOutData data;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the WorkOut application
-    public WorkOutApp() {
+    public WorkOutApp() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runWorkOutApp();
+
     }
 
     // Code used from runTeller() in Teller App Code and modified as needed
@@ -65,6 +72,10 @@ public class WorkOutApp {
             displayAllWorkouts();
         } else if (command.equals("f")) {
             displayAllExercises();
+        } else if (command.equals("s")) {
+            saveProgress();
+        } else if (command.equals("l")) {
+            loadProgress();
         } else {
             System.out.println("Please select valid input.");
         }
@@ -74,6 +85,7 @@ public class WorkOutApp {
     // MODIFIES: this
     // EFFECTS: initializes default exercises and workout
     private void init() {
+        data = new AllWorkOutData();
         Exercise crunches = new Exercise("Crunches",
                 "Lie down and sit half-way up", 4, 1);
         Exercise sitUps = new Exercise("Sit-ups",
@@ -86,10 +98,10 @@ public class WorkOutApp {
         fullBody.addExercise(crunches);
         fullBody.addExercise(sitUps);
         fullBody.addExercise(squats);
-        allWorkouts.add(fullBody);
-        allExercises.add(squats);
-        allExercises.add(crunches);
-        allExercises.add(sitUps);
+        data.getWorkouts().add(fullBody);
+        data.getExercises().add(squats);
+        data.getExercises().add(crunches);
+        data.getExercises().add(sitUps);
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -104,25 +116,27 @@ public class WorkOutApp {
         System.out.println("\td -> start workout");
         System.out.println("\te -> display all workouts");
         System.out.println("\tf -> display all exercises");
+        System.out.println("\ts -> save progress");
+        System.out.println("\tl -> load progress");
         System.out.println("\tq -> quit");
     }
 
     // REQUIRES: Exercises added to Workout must be in the allExercises Array
-    // MODIFIES: allWorkouts Array
+    // MODIFIES: this
     // EFFECTS: creates a new Workout and adds it to the allWorkouts Array
     private void addWorkout() {
         String selection = "";
         System.out.println("Enter workout name: ");
         String workoutName = input.next();
         WorkOut newWorkout = new WorkOut(workoutName);
-        allWorkouts.add(newWorkout);
+        data.getWorkouts().add(newWorkout);
         System.out.println("Enter exercise name or press d if done.");
         while (!selection.equals("d")) {
             Exercise addExercise;
             System.out.println("Enter exercise:");
             String exerciseName = input.next();
             selection = exerciseName;
-            addExercise = searchExerciseArray(allExercises, exerciseName);
+            addExercise = searchExerciseArray(data.getExercises(), exerciseName);
             newWorkout.addExercise(addExercise);
             if (selection.equals("d")) {
                 System.out.println("Back to main menu.");
@@ -134,7 +148,7 @@ public class WorkOutApp {
     }
 
     // REQUIRES: exercise name and description must be strings; reps and sets must be positive integers
-    // MODIFIES: allExercises Array
+    // MODIFIES: this
     // EFFECTS: creates a new Exercise and adds it to the allExercises Array
     private void addExercise() {
         Exercise exercise;
@@ -147,7 +161,7 @@ public class WorkOutApp {
         System.out.println("Enter exercise sets:");
         int exerciseSets = input.nextInt();
         exercise = new Exercise(exerciseName, exerciseDescription, exerciseReps, exerciseSets);
-        allExercises.add(exercise);
+        data.getExercises().add(exercise);
         System.out.println("Exercise added to directory!");
     }
 
@@ -159,7 +173,7 @@ public class WorkOutApp {
         WorkOut chosenWorkOut;
         System.out.println("Type the name of your Workout:");
         String typedWorkOut = input.next();
-        chosenWorkOut = searchWorkOutArray(allWorkouts, typedWorkOut);
+        chosenWorkOut = searchWorkOutArray(data.getWorkouts(), typedWorkOut);
         System.out.println("Starting " + chosenWorkOut.getWorkOutName() + " in \n");
         System.out.println("3...\n");
         System.out.println("2...\n");
@@ -171,17 +185,16 @@ public class WorkOutApp {
             if (i < (allExercises.size() - 1)) {
                 System.out.println("Next exercise!");
             } else {
-                personStats.addCompletedWorkout();
+                data.getPersonStats().addCompletedWorkout();
                 System.out.println("Great job completing this workout!");
             }
         }
-
     }
 
     // EFFECTS: prints out the number of completed Workouts and Reps
     private void seeStats() {
-        System.out.println("You have completed " + personStats.getCompletedWorkouts() + " workouts.");
-        System.out.println("You have completed " + personStats.getCompletedReps() + " reps.");
+        System.out.println("You have completed " + data.getPersonStats().getCompletedWorkouts() + " workouts.");
+        System.out.println("You have completed " + data.getPersonStats().getCompletedReps() + " reps.");
     }
 
     // EFFECTS: searches the allWorkouts array and produces the workout.
@@ -209,7 +222,7 @@ public class WorkOutApp {
 
     }
 
-    // MODIFIES: personStats
+    // MODIFIES: personStats, allWorkoutData
     // EFFECTS: starts playing the chosen exercise. Adds one to reps in
     //          PersonStats with each completed rep.
     private void playExercise(Exercise exercise) {
@@ -219,10 +232,7 @@ public class WorkOutApp {
         System.out.println("This exercise is: " + exercise.exerciseDifficulty() + ".");
         for (int j = 0; j < exercise.getSets(); j++) {
             int rp = exercise.getReps();
-            for (int i = 0; i < exercise.getReps(); i++) {
-                playExerciseHelper(exercise, rp, i);
-                rp = rp - 1;
-            }
+            playExerciseHelper(exercise, rp);
             System.out.println((j + 1) + " sets done! " + (st - j - 1) + " sets left!");
             if ((st - j - 1) == 0) {
                 System.out.println("All sets done.");
@@ -237,48 +247,65 @@ public class WorkOutApp {
     // MODIFIES: personStats
     // EFFECTS: helper function for playExercise. Starts playing the chosen exercise.
     //          Adds one to reps in PersonStats with each completed rep.
-    private void playExerciseHelper(Exercise exercise, int rp, int i) {
-        System.out.println("Perform 1 rep of " + exercise.getName() + ".");
+    private void playExerciseHelper(Exercise exercise, int rp) {
+        System.out.println("Perform " + rp + " reps of " + exercise.getName() + ".");
         System.out.println("Press any key when done or q to quit.");
         String nextRep = input.next();
         if (nextRep.equals("q")) {
             System.out.println("Better luck next time!");
             java.lang.System.exit(0);
         } else {
-            rp = rp - 1;
-            System.out.println((i + 1) + " reps done, " + rp + " reps left.");
-            personStats.addCompletedReps();
-
+            for (int i = 0; i < exercise.getReps(); i++) {
+                data.getPersonStats().addCompletedReps();
+            }
         }
+
     }
 
     // EFFECTS: allows you to view the names of available exercises
     private void displayAllExercises() {
         System.out.println("Exercises available:");
-        for (int i = 0; i < allExercises.size(); i++) {
-            System.out.println(allExercises.get(i).getName());
+        for (int i = 0; i < data.getExercises().size(); i++) {
+            ArrayList<Exercise> exercises = data.getExercises();
+            System.out.println(exercises.get(i).getName());
         }
     }
 
     // EFFECTS: allows you to view the names of available workouts
     private void displayAllWorkouts() {
         System.out.println("Workouts available:");
-        for (int i = 0; i < allWorkouts.size(); i++) {
-            System.out.println(allWorkouts.get(i).getWorkOutName());
+        for (int i = 0; i < data.getWorkouts().size(); i++) {
+            ArrayList<WorkOut> workouts = data.getWorkouts();
+            System.out.println(workouts.get(i).getWorkOutName());
         }
     }
 
-//    // !!!
-//    // to be added in next phase
-//    private void deleteWorkout() {
-//
-//    }
-//
-//    // !!!
-//    // to be added in next phase
-//    private void deleteExercise() {
-//
-//    }
+    // EFFECTS: saves the workroom to file
+    // Used saveWorkRoom from JSONSerializationDemo
+    // Source: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    private void saveProgress() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(data);
+            jsonWriter.close();
+            System.out.println("Saved progress to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    // Used loadWorkRoom from JSONSerializationDemo
+    // Source: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    private void loadProgress() {
+        try {
+            data = jsonReader.read();
+            System.out.println("Loaded data from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 
 }
 

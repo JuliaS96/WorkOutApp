@@ -4,7 +4,10 @@ package model;
 // - how many workouts a person has completed
 // - how many reps
 
-public class PersonStats {
+import org.json.JSONObject;
+import persistence.Writeable;
+
+public class PersonStats implements Writeable {
     private int completedWorkouts;
     private int completedReps;
 
@@ -25,11 +28,35 @@ public class PersonStats {
         completedReps = completedReps + 1;
     }
 
+    // EFFECTS: returns completed workouts
     public int getCompletedWorkouts() {
         return completedWorkouts;
     }
 
+    // EFFECTS: returns completed reps
     public int getCompletedReps() {
         return completedReps;
     }
+
+    // MODIFIES: this
+    // EFFECTS: sets completed reps to i
+    public void setCompletedReps(int i) {
+        completedReps = i;
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: sets completed workouts to i
+    public void setCompletedWorkOuts(int i) {
+        completedWorkouts = i;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Reps", completedReps);
+        json.put("WorkOuts", completedWorkouts);
+        return json;
+    }
+
 }

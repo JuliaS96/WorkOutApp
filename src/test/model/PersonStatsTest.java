@@ -38,4 +38,27 @@ class PersonStatsTest {
         assertEquals(3, testPersonStats.getCompletedWorkouts());
     }
 
+    @Test
+    void testSetCompletedReps() {
+        testPersonStats.setCompletedReps(3);
+        assertEquals(3, testPersonStats.getCompletedReps());
+        testPersonStats.setCompletedReps(6);
+        assertEquals(6, testPersonStats.getCompletedReps());
+        testPersonStats.setCompletedReps(0);
+        assertEquals(0, testPersonStats.getCompletedReps());
+    }
+
+    @Test
+    void testSetCompletedWorkouts() {
+        testPersonStats.setCompletedWorkOuts(4);
+        assertEquals(4, testPersonStats.getCompletedWorkouts());
+        testPersonStats.setCompletedWorkOuts(10);
+        assertEquals(10, testPersonStats.getCompletedWorkouts());
+        testPersonStats.setCompletedWorkOuts(0);
+        assertEquals(0, testPersonStats.getCompletedWorkouts());
+    }
+
+
+
+
 }
