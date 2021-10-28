@@ -15,7 +15,7 @@ class PersonStatsTest {
 
 
     @Test
-    void testContructor() {
+    void testConstructor() {
         assertEquals(0, testPersonStats.getCompletedReps());
         assertEquals(0, testPersonStats.getCompletedWorkouts());
     }

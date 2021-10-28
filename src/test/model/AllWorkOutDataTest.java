@@ -12,8 +12,7 @@ public class AllWorkOutDataTest {
     private AllWorkOutData data;
     private Exercise testExercise;
     private Exercise testExercise1;
-    private Exercise testExercise0;
-    private Exercise testExercise7;
+
     private WorkOut testWorkout;
     private WorkOut testWorkout2;
     private ArrayList<WorkOut> workouts = new ArrayList<WorkOut>();
@@ -31,10 +30,6 @@ public class AllWorkOutDataTest {
                 "Lie down and sit up", 10, 5);
         testExercise1 = new Exercise("Sit-ups",
                 "Lie down and sit up", 1, 3);
-        testExercise0 = new Exercise("Sit-ups",
-                "Lie down and sit up", 0, 0);
-        testExercise7 = new Exercise("Sit-ups",
-                "Lie down and sit up", 7, 1);
         testWorkout.addExercise(testExercise);
         testWorkout.addExercise(testExercise1);
         workouts2.add(testWorkout);

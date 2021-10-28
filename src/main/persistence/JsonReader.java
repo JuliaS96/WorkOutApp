@@ -2,7 +2,7 @@ package persistence;
 
 import model.AllWorkOutData;
 import model.Exercise;
-import model.PersonStats;
+
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
