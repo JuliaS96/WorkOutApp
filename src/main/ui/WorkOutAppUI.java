@@ -21,7 +21,7 @@ import java.util.Scanner;
 
 public class WorkOutAppUI extends JFrame {
     private static final int WIDTH = 850;
-    private static final int HEIGHT = 800;
+    private static final int HEIGHT = 400;
     private static final String JSON_STORE = "./data/workoutData.json";
     private Exercise defaultExercise;
     private WorkOut fullBody;
@@ -36,11 +36,16 @@ public class WorkOutAppUI extends JFrame {
     private StartWorkOutButton startWorkOutButton;
     private DisplayAllWorkoutsButton displayAllWorkoutsButton;
     private DisplayAllExercisesButton displayAllExercisesButton;
+    private AddExerciseButton addExerciseButton;
     private SeeStatsButton seeStatsButton;
     private SaveButton saveButton;
     private LoadButton loadButton;
     private AddWorkOutButton addWorkOutButton;
     private JTabbedPane tabbedPane;
+    private JTextField nameField;
+    private JTextField descriptionField;
+    private SpinnerNumberModel modelReps;
+    private SpinnerNumberModel modelSets;
 
 
     // EFFECTS: Constructor sets up window, and button panel.
@@ -49,9 +54,8 @@ public class WorkOutAppUI extends JFrame {
         init();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        initializeGraphics();
+        initializeGraphics(0);
         initializeInteraction();
-        //addKeyListener(new KeyHandler());
     }
 
     // Code used from init() in Teller App Code and modified as needed
@@ -86,7 +90,7 @@ public class WorkOutAppUI extends JFrame {
     }
 
     // EFFECTS: draws the JFrame window where the DrawingEditor will operate, and populates the menu buttons
-    public void initializeGraphics() {
+    public void initializeGraphics(int i) {
         desktop = new JDesktopPane();
         desktop.setLayout(new BorderLayout());
         setContentPane(desktop);
@@ -95,7 +99,7 @@ public class WorkOutAppUI extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         centreOnScreen();
         setVisible(true);
-        createTabs();
+        createTabs(i);
     }
 
     //Code used from the AlarmSystem application
@@ -106,16 +110,16 @@ public class WorkOutAppUI extends JFrame {
         setLocation((width - getWidth()) / 2, (height - getHeight()) / 2);
     }
 
-    public void createTabs() {
+    public void createTabs(int i) {
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Your Stats", null, statsPane(), null);
-        tabbedPane.addTab("Add Exercise", null, statsPane(), null);
+        tabbedPane.addTab("Add Exercise", null, addExercisePane(), null);
         tabbedPane.addTab("Add Workout", null, statsPane(), null);
         tabbedPane.addTab("Exercises", null, exercisesPane(), null);
         tabbedPane.addTab("WorkOuts", null, workOutsPane(), null);
         tabbedPane.addTab("Play!", null, statsPane(), null);
-        tabbedPane.setSelectedIndex(0);
         add(tabbedPane);
+        tabbedPane.setSelectedIndex(i);
     }
 
     public JPanel statsPane() {
@@ -124,36 +128,89 @@ public class WorkOutAppUI extends JFrame {
         int workouts = data.getPersonStats().getCompletedWorkouts();
         personStatsPanel.setLayout(new BoxLayout(personStatsPanel,
                 BoxLayout.Y_AXIS));
+        personStatsPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
+
         JLabel label = new JLabel("Your Stats:", JLabel.CENTER);
         JLabel labelReps = new JLabel("You have completed " + String.valueOf(reps) + " repetitions.",
                 JLabel.CENTER);
         JLabel labelWorkouts = new JLabel("You have completed " + String.valueOf(workouts) + " workouts.",
                 JLabel.CENTER);
+        personStatsPanel.add(Box.createVerticalStrut(5));
         personStatsPanel.add(label);
+        personStatsPanel.add(Box.createVerticalStrut(5));
         personStatsPanel.add(labelReps);
+        personStatsPanel.add(Box.createVerticalStrut(5));
         personStatsPanel.add(labelWorkouts);
         return personStatsPanel;
+    }
+
+    public JPanel addExercisePane() {
+        JPanel addExercisePanel = new JPanel();
+        JLabel name = new JLabel("Exercise name:");
+        JLabel description = new JLabel("Description:");
+        JLabel reps = new JLabel("Reps:");
+        JLabel sets = new JLabel("Sets:");
+        nameField = new JTextField(10);
+
+        descriptionField = new JTextField(10);
+        modelReps = new SpinnerNumberModel(1, 1, 30, 1);
+        modelSets = new SpinnerNumberModel(1, 1, 10, 1);
+        JSpinner repsField = new JSpinner(modelReps);
+        JSpinner setsField = new JSpinner(modelSets);
+        addExercisePanel.setLayout(new BoxLayout(addExercisePanel, BoxLayout.Y_AXIS));
+        addExerciseSetUp(addExercisePanel, name, nameField, description, descriptionField, reps,
+                repsField, sets, setsField);
+        addExerciseButton = new AddExerciseButton(this, addExercisePanel);
+        return addExercisePanel;
+
+    }
+
+    public void addExerciseSetUp(JPanel addExercisePane, JLabel name, JTextField nameField,
+                                 JLabel description, JTextField descriptionField, JLabel reps,
+                                 JSpinner repsField, JLabel sets, JSpinner setsField) {
+        addExercisePane.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
+        addExercisePane.add(Box.createVerticalStrut(5));
+        addExercisePane.add(name);
+        addExercisePane.add(nameField);
+        addExercisePane.add(Box.createVerticalStrut(5));
+        addExercisePane.add(description);
+        addExercisePane.add(descriptionField);
+        addExercisePane.add(Box.createVerticalStrut(5));
+        addExercisePane.add(reps);
+        addExercisePane.add(repsField);
+        addExercisePane.add(Box.createVerticalStrut(5));
+        addExercisePane.add(sets);
+        addExercisePane.add(setsField);
+        addExercisePane.add(Box.createVerticalStrut(5));
+
     }
 
     public JPanel exercisesPane() {
         ArrayList<Exercise> exercises = data.getExercises();
         JPanel exercisesPane = new JPanel();
+        exercisesPane.setLayout(new BoxLayout(exercisesPane, BoxLayout.Y_AXIS));
+        exercisesPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
+        exercisesPane.add(Box.createVerticalStrut(5));
         for (Exercise e : exercises) {
             JLabel label = new JLabel(e.getName());
             exercisesPane.add(label);
+            exercisesPane.add(Box.createVerticalStrut(5));
         }
         return exercisesPane;
     }
 
-
     public JPanel workOutsPane() {
         ArrayList<WorkOut> workOuts = data.getWorkouts();
-        JPanel exercisesPane = new JPanel();
+        JPanel workOutsPane = new JPanel();
+        workOutsPane.setLayout(new BoxLayout(workOutsPane, BoxLayout.Y_AXIS));
+        workOutsPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
+        workOutsPane.add(Box.createVerticalStrut(5));
         for (WorkOut w : workOuts) {
             JLabel label = new JLabel(w.getWorkOutName());
-            exercisesPane.add(label);
+            workOutsPane.add(label);
+            workOutsPane.add(Box.createVerticalStrut(5));
         }
-        return exercisesPane;
+        return workOutsPane;
     }
 
     public void createButtons() {
@@ -170,6 +227,10 @@ public class WorkOutAppUI extends JFrame {
         loadButton = new LoadButton(this, buttonArea);
         saveButton = new SaveButton(this, buttonArea);
         seeStatsButton.activate();
+    }
+
+    public void playExercisePanel() {
+
     }
 
 
@@ -204,6 +265,8 @@ public class WorkOutAppUI extends JFrame {
 
     }
 
+    // getter
+    // EFFECTS: gets the all workout data array
     public AllWorkOutData getData() {
         return data;
     }
@@ -237,6 +300,22 @@ public class WorkOutAppUI extends JFrame {
 
     public JTabbedPane getTabs() {
         return tabbedPane;
+    }
+
+    public JTextField getExerciseName() {
+        return nameField;
+    }
+
+    public JTextField getExerciseDesc() {
+        return descriptionField;
+    }
+
+    public SpinnerNumberModel getModelReps() {
+        return modelReps;
+    }
+
+    public SpinnerNumberModel getModelSets() {
+        return modelSets;
     }
 
 

@@ -23,7 +23,5 @@ public class StartWorkOutButton extends Button {
     public void performAction(WorkOutAppUI parent) {
         JTabbedPane tabbedPane = parent.getTabs();
         tabbedPane.setSelectedIndex(5);
-
-
     }
 }
