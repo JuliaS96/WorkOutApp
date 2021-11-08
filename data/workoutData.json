@@ -87,6 +87,15 @@
                 }
             ],
             "name": "New Test"
+        },
+        {
+            "exercises": [{
+                "reps": 3,
+                "sets": 2,
+                "name": "Default Exercise",
+                "description": "Jump! Jump! Jump!"
+            }],
+            "name": "emily test"
         }
     ]
 }

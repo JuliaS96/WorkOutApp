@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 import model.WorkOut;
 import org.json.*;
 
-// !!!! Represents a reader that reads workout app data from JSON data stored in file
+// Represents a reader that reads workout app data from JSON data stored in file
 // Used JsonReader from JSONSerializationDemo to model program
 // Source: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class JsonReader {
