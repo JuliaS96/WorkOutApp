@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 // Represents the main window in which the work-out app functions
@@ -111,7 +112,7 @@ public class WorkOutAppUI extends JFrame {
         tabbedPane.addTab("Add Exercise", null, statsPane(), null);
         tabbedPane.addTab("Add Workout", null, statsPane(), null);
         tabbedPane.addTab("Exercises", null, exercisesPane(), null);
-        tabbedPane.addTab("WorkOuts", null, statsPane(), null);
+        tabbedPane.addTab("WorkOuts", null, workOutsPane(), null);
         tabbedPane.addTab("Play!", null, statsPane(), null);
         tabbedPane.setSelectedIndex(0);
         add(tabbedPane);
@@ -135,7 +136,23 @@ public class WorkOutAppUI extends JFrame {
     }
 
     public JPanel exercisesPane() {
+        ArrayList<Exercise> exercises = data.getExercises();
         JPanel exercisesPane = new JPanel();
+        for (Exercise e : exercises) {
+            JLabel label = new JLabel(e.getName());
+            exercisesPane.add(label);
+        }
+        return exercisesPane;
+    }
+
+
+    public JPanel workOutsPane() {
+        ArrayList<WorkOut> workOuts = data.getWorkouts();
+        JPanel exercisesPane = new JPanel();
+        for (WorkOut w : workOuts) {
+            JLabel label = new JLabel(w.getWorkOutName());
+            exercisesPane.add(label);
+        }
         return exercisesPane;
     }
 
