@@ -35,7 +35,7 @@ public class AddWorkOutToListButton extends Button {
         parent.exerciseSelectorPane(names);
         WorkOut workOutToAdd = new WorkOut(parent.getWorkOutNameToAdd().getText());
         data.getWorkouts().add(workOutToAdd);
-        workOutAppUI.initializeGraphics(2);
+
 
     }
 }

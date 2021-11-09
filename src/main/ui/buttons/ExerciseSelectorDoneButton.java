@@ -20,6 +20,7 @@ public class ExerciseSelectorDoneButton extends Button {
     @Override
     public void performAction(WorkOutAppUI parent) {
         parent.getExerciseSelector().setVisible(false);
+        workOutAppUI.initializeGraphics(2);
 
     }
 

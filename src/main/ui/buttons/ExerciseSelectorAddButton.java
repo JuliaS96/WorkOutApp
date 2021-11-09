@@ -1,8 +1,12 @@
 package ui.buttons;
 
+import model.AllWorkOutData;
+import model.Exercise;
+import model.WorkOut;
 import ui.WorkOutAppUI;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class ExerciseSelectorAddButton extends Button {
 
@@ -18,8 +22,23 @@ public class ExerciseSelectorAddButton extends Button {
 
     @Override
     public void performAction(WorkOutAppUI parent) {
-
+        Exercise currentExercise;
+        WorkOutAppUI workOutAppUI = parent;
+        AllWorkOutData data = workOutAppUI.getData();
+        ArrayList<WorkOut> workOuts = data.getWorkouts();
+        ArrayList<Exercise> exercises = data.getExercises();
+        String currentWorkOutName = parent.getWorkOutNameToAdd().getText();
+        String currentExerciseName = "Squats";
+        for (Exercise e : exercises) {
+            if (e.getName().equals(currentExerciseName)) {
+                currentExercise = e;
+                for (WorkOut w : workOuts) {
+                    if (w.getWorkOutName().equals(currentWorkOutName)) {
+                        w.addExercise(currentExercise);
+                    }
+                }
+            }
+        }
     }
-
-
 }
+
