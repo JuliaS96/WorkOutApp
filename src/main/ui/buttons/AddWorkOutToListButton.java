@@ -7,17 +7,15 @@ import ui.WorkOutAppUI;
 
 import javax.swing.*;
 
-public class AddExerciseButton extends Button {
+public class AddWorkOutToListButton extends Button {
 
-
-
-    public AddExerciseButton(WorkOutAppUI workOutAppUI, JComponent parent) {
+    public AddWorkOutToListButton(WorkOutAppUI workOutAppUI, JComponent parent) {
         super(workOutAppUI, parent);
     }
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Add Exercise");
+        button = new JButton("Exercise Selector");
         button = customizeButton(button);
     }
 
@@ -26,16 +24,11 @@ public class AddExerciseButton extends Button {
         WorkOutAppUI workOutAppUI = parent;
         String name = workOutAppUI.getExerciseName().getText();
         String description = workOutAppUI.getExerciseDesc().getText();
-        int reps = (int) workOutAppUI.getModelReps().getValue();
-        int sets = (int) workOutAppUI.getModelSets().getValue();
-        Exercise exercise = new Exercise(name, description, reps, sets);
         AllWorkOutData data = workOutAppUI.getData();
-        data.getExercises().add(exercise);
+        WorkOut workOutToAdd = new WorkOut("");
+        data.getWorkouts().add(workOutToAdd);
         System.out.println("done");
-        JOptionPane box = new JOptionPane();
-        box.showMessageDialog(parent,"Exercise added.", "Notification", JOptionPane.PLAIN_MESSAGE);
         workOutAppUI.initializeGraphics(1);
-
+        // working on this !!!! still got play exercise after to do....
     }
-
 }

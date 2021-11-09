@@ -46,6 +46,7 @@ public class WorkOutAppUI extends JFrame {
     private JTextField descriptionField;
     private SpinnerNumberModel modelReps;
     private SpinnerNumberModel modelSets;
+    JTextField workOutToAddNameField;
 
 
     // EFFECTS: Constructor sets up window, and button panel.
@@ -114,10 +115,10 @@ public class WorkOutAppUI extends JFrame {
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Your Stats", null, statsPane(), null);
         tabbedPane.addTab("Add Exercise", null, addExercisePane(), null);
-        tabbedPane.addTab("Add Workout", null, statsPane(), null);
+        tabbedPane.addTab("Add Workout", null, addWorkOutPane(), null);
         tabbedPane.addTab("Exercises", null, exercisesPane(), null);
         tabbedPane.addTab("WorkOuts", null, workOutsPane(), null);
-        tabbedPane.addTab("Play!", null, statsPane(), null);
+        tabbedPane.addTab("Play!", null, playExercisePanel(), null);
         add(tabbedPane);
         tabbedPane.setSelectedIndex(i);
     }
@@ -151,7 +152,6 @@ public class WorkOutAppUI extends JFrame {
         JLabel reps = new JLabel("Reps:");
         JLabel sets = new JLabel("Sets:");
         nameField = new JTextField(10);
-
         descriptionField = new JTextField(10);
         modelReps = new SpinnerNumberModel(1, 1, 30, 1);
         modelSets = new SpinnerNumberModel(1, 1, 10, 1);
@@ -182,6 +182,34 @@ public class WorkOutAppUI extends JFrame {
         addExercisePane.add(sets);
         addExercisePane.add(setsField);
         addExercisePane.add(Box.createVerticalStrut(5));
+
+    }
+
+    // !!!!
+    public JPanel addWorkOutPane() {
+        JPanel addWorkOutPanel = new JPanel();
+        JLabel name = new JLabel("Please enter a name for your work out first:");
+        workOutToAddNameField = new JTextField(10);
+        ArrayList<String> allExercisesNames = new ArrayList<>();
+        for (Object e : data.getExercises()) {
+            Exercise e1 = (Exercise) e;
+            String currName = e1.getName();
+            allExercisesNames.add(currName);
+        }
+        SpinnerListModel exercisesAvailable = new SpinnerListModel(allExercisesNames);
+        JSpinner exerciseSelection = new JSpinner(exercisesAvailable);
+        addWorkOutPanel.setLayout(new BoxLayout(addWorkOutPanel, BoxLayout.Y_AXIS));
+        addWorkOutPanel.add(name);
+        addWorkOutPanel.add(workOutToAddNameField);
+        addWorkOutButton(addWorkOutPanel);
+        return addWorkOutPanel;
+
+    }
+
+    public void addWorkOutButton(JPanel panel) {
+        AddWorkOutToListButton addWorkOutButton = new AddWorkOutToListButton(this, panel);
+        // exercise selector pops up and allows you to pick the exercises one at a time
+        // exercise selector has two buttons: add exercise and add workout
 
     }
 
@@ -229,7 +257,10 @@ public class WorkOutAppUI extends JFrame {
         seeStatsButton.activate();
     }
 
-    public void playExercisePanel() {
+    // !!!!
+    public JPanel playExercisePanel() {
+        JPanel playPanel = new JPanel();
+        return playPanel;
 
     }
 

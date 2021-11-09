@@ -22,7 +22,8 @@ public class DisplayAllWorkoutsButton extends Button {
     @Override
     public void performAction(WorkOutAppUI parent) {
         JTabbedPane tabbedPane = parent.getTabs();
-        tabbedPane.setSelectedIndex(4);
+        workOutAppUI.initializeGraphics(4);
+
 
     }
 }
