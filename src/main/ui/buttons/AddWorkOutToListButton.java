@@ -24,7 +24,6 @@ public class AddWorkOutToListButton extends Button {
     public void performAction(WorkOutAppUI parent) {
         WorkOutAppUI workOutAppUI = parent;
         AllWorkOutData data = workOutAppUI.getData();
-        ArrayList<Exercise> exercises = data.getExercises();
         ArrayList<String> allExercisesNames = new ArrayList<>();
         for (Object e : data.getExercises()) {
             Exercise e1 = (Exercise) e;
@@ -34,10 +33,9 @@ public class AddWorkOutToListButton extends Button {
         String[] str = new String[allExercisesNames.size()];
         JList<String> names = new JList<String>(allExercisesNames.toArray(str));
         parent.exerciseSelectorPane(names);
-        WorkOut workOutToAdd = new WorkOut("");
+        WorkOut workOutToAdd = new WorkOut(parent.getWorkOutNameToAdd().getText());
         data.getWorkouts().add(workOutToAdd);
-        System.out.println("done");
+        workOutAppUI.initializeGraphics(2);
 
-        // working on this !!!! still got play exercise after to do....
     }
 }

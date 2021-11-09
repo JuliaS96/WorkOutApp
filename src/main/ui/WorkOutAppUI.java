@@ -46,7 +46,8 @@ public class WorkOutAppUI extends JFrame {
     private JTextField descriptionField;
     private SpinnerNumberModel modelReps;
     private SpinnerNumberModel modelSets;
-    JTextField workOutToAddNameField;
+    private JTextField workOutToAddNameField;
+    private JDialog exerciseSelector;
 
 
     // EFFECTS: Constructor sets up window, and button panel.
@@ -206,8 +207,8 @@ public class WorkOutAppUI extends JFrame {
     }
 
     public JDialog exerciseSelectorPane(JList<String> exercises) {
-        JDialog exerciseSelector = new JDialog();
-        exerciseSelector.setLayout(new GridLayout());
+        exerciseSelector = new JDialog();
+        exerciseSelector.setLayout(new FlowLayout());
         JScrollPane exercisesScroll = new JScrollPane(exercises);
         exercisesScroll.setPreferredSize(new Dimension(250, 80));
         JPanel pane = new JPanel();
@@ -357,5 +358,11 @@ public class WorkOutAppUI extends JFrame {
         return modelSets;
     }
 
+    public JTextField getWorkOutNameToAdd() {
+        return workOutToAddNameField;
+    }
 
+    public JDialog getExerciseSelector() {
+        return exerciseSelector;
+    }
 }
