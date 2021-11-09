@@ -28,7 +28,8 @@ public class ExerciseSelectorAddButton extends Button {
         ArrayList<WorkOut> workOuts = data.getWorkouts();
         ArrayList<Exercise> exercises = data.getExercises();
         String currentWorkOutName = parent.getWorkOutNameToAdd().getText();
-        String currentExerciseName = "Squats";
+        JList<String> exercisesInJList = parent.getExercisesinJList();
+        String currentExerciseName = (String)(exercisesInJList.getSelectedValue());
         for (Exercise e : exercises) {
             if (e.getName().equals(currentExerciseName)) {
                 currentExercise = e;
