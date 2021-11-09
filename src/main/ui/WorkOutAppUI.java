@@ -190,14 +190,6 @@ public class WorkOutAppUI extends JFrame {
         JPanel addWorkOutPanel = new JPanel();
         JLabel name = new JLabel("Please enter a name for your work out first:");
         workOutToAddNameField = new JTextField(10);
-        ArrayList<String> allExercisesNames = new ArrayList<>();
-        for (Object e : data.getExercises()) {
-            Exercise e1 = (Exercise) e;
-            String currName = e1.getName();
-            allExercisesNames.add(currName);
-        }
-        SpinnerListModel exercisesAvailable = new SpinnerListModel(allExercisesNames);
-        JSpinner exerciseSelection = new JSpinner(exercisesAvailable);
         addWorkOutPanel.setLayout(new BoxLayout(addWorkOutPanel, BoxLayout.Y_AXIS));
         addWorkOutPanel.add(name);
         addWorkOutPanel.add(workOutToAddNameField);
@@ -210,6 +202,22 @@ public class WorkOutAppUI extends JFrame {
         AddWorkOutToListButton addWorkOutButton = new AddWorkOutToListButton(this, panel);
         // exercise selector pops up and allows you to pick the exercises one at a time
         // exercise selector has two buttons: add exercise and add workout
+
+    }
+
+    public JDialog exerciseSelectorPane(JList<String> exercises) {
+        JDialog exerciseSelector = new JDialog();
+        exerciseSelector.setLayout(new GridLayout());
+        JScrollPane exercisesScroll = new JScrollPane(exercises);
+        exercisesScroll.setPreferredSize(new Dimension(250, 80));
+        JPanel pane = new JPanel();
+        exerciseSelector.add(pane);
+        exerciseSelector.add(exercisesScroll);
+        ExerciseSelectorAddButton addButton = new ExerciseSelectorAddButton(this, pane);
+        ExerciseSelectorDoneButton doneButton = new ExerciseSelectorDoneButton(this, pane);
+        exerciseSelector.pack();
+        exerciseSelector.setVisible(true);
+        return exerciseSelector;
 
     }
 

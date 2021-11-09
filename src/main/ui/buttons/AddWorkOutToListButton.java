@@ -6,6 +6,7 @@ import model.WorkOut;
 import ui.WorkOutAppUI;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class AddWorkOutToListButton extends Button {
 
@@ -22,13 +23,21 @@ public class AddWorkOutToListButton extends Button {
     @Override
     public void performAction(WorkOutAppUI parent) {
         WorkOutAppUI workOutAppUI = parent;
-        String name = workOutAppUI.getExerciseName().getText();
-        String description = workOutAppUI.getExerciseDesc().getText();
         AllWorkOutData data = workOutAppUI.getData();
+        ArrayList<Exercise> exercises = data.getExercises();
+        ArrayList<String> allExercisesNames = new ArrayList<>();
+        for (Object e : data.getExercises()) {
+            Exercise e1 = (Exercise) e;
+            String currName = e1.getName();
+            allExercisesNames.add(currName);
+        }
+        String[] str = new String[allExercisesNames.size()];
+        JList<String> names = new JList<String>(allExercisesNames.toArray(str));
+        parent.exerciseSelectorPane(names);
         WorkOut workOutToAdd = new WorkOut("");
         data.getWorkouts().add(workOutToAdd);
         System.out.println("done");
-        workOutAppUI.initializeGraphics(1);
+
         // working on this !!!! still got play exercise after to do....
     }
 }
