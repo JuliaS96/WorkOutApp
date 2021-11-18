@@ -288,10 +288,7 @@ public class WorkOutAppUI extends JFrame {
         return playPanel;
     }
 
-    // !!! make a JDialog box pop up
-    // need to make play selected button find the right workout
-    // popup will show the intro text then when you press begin, it will go through each set
-    // perhaps can make a countdown?
+
     // at the end: great job completing this workout (add image?) and done
     // add data to person stats after pressing done
     public JDialog exercisePlayer(WorkOut workOut) {
@@ -301,6 +298,23 @@ public class WorkOutAppUI extends JFrame {
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
         exercisePlayer.add(pane);
 
+        JPanel textPane = getjPanel(workOut);
+
+        JPanel buttonPane = new JPanel();
+        buttonPane.setLayout(new FlowLayout());
+
+        NextButton nextButton = new NextButton(this, buttonPane);
+        QuitWorkOut doneButton = new QuitWorkOut(this, buttonPane);
+
+        pane.add(textPane);
+        pane.add(buttonPane);
+
+        exercisePlayer.pack();
+        exercisePlayer.setVisible(true);
+        return exercisePlayer;
+    }
+
+    private JPanel getjPanel(WorkOut workOut) {
         JLabel name = new JLabel(workOut.getWorkOutName());
         JLabel firstLine = new JLabel("Starting " + workOut.getWorkOutName() + " in \n");
         JLabel line3 = new JLabel("3...");
@@ -308,21 +322,13 @@ public class WorkOutAppUI extends JFrame {
         JLabel line1 = new JLabel("1...");
 
         JPanel textPane = new JPanel();
-        textPane.setLayout(new FlowLayout());
+        textPane.setLayout(new BoxLayout(textPane, BoxLayout.Y_AXIS));
         textPane.add(name);
         textPane.add(firstLine);
         textPane.add(line3);
         textPane.add(line2);
         textPane.add(line1);
-
-        JPanel buttonPane = new JPanel();
-        buttonPane.setLayout(new FlowLayout());
-
-        NextButton nextButton = new NextButton(this, buttonPane);
-        QuitWorkOut doneButton = new QuitWorkOut(this, buttonPane);
-        exercisePlayer.pack();
-        exercisePlayer.setVisible(true);
-        return exercisePlayer;
+        return textPane;
     }
 
 
