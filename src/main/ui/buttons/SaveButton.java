@@ -25,6 +25,7 @@ public class SaveButton extends Button {
         JOptionPane box = new JOptionPane();
         box.showMessageDialog(parent,"Data saved to file.", "Notification", JOptionPane.PLAIN_MESSAGE);
         workOutAppUI.initializeGraphics(0);
+
     }
 
 }

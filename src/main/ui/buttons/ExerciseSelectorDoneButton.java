@@ -21,6 +21,8 @@ public class ExerciseSelectorDoneButton extends Button {
     public void performAction(WorkOutAppUI parent) {
         parent.getExerciseSelector().setVisible(false);
         workOutAppUI.initializeGraphics(2);
+        JOptionPane box = new JOptionPane();
+        box.showMessageDialog(parent,"Workout added.", "Notification", JOptionPane.PLAIN_MESSAGE);
 
     }
 

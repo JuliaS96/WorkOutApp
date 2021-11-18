@@ -23,7 +23,7 @@ public class LoadButton extends Button {
         parent.loadProgress();
         JOptionPane box = new JOptionPane();
         box.showMessageDialog(parent,"Data loaded from file.", "Notification", JOptionPane.PLAIN_MESSAGE);
-        workOutAppUI.initializeGraphics(0);
+        workOutAppUI.initializeGraphics(1);
 
     }
 

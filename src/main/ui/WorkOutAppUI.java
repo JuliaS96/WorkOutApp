@@ -20,8 +20,8 @@ import java.util.Scanner;
 // Includes buttons and screen for workouts
 
 public class WorkOutAppUI extends JFrame {
-    private static final int WIDTH = 850;
-    private static final int HEIGHT = 400;
+    private static final int WIDTH = 550;
+    private static final int HEIGHT = 600;
     private static final String JSON_STORE = "./data/workoutData.json";
     private Exercise defaultExercise;
     private WorkOut fullBody;
@@ -50,6 +50,9 @@ public class WorkOutAppUI extends JFrame {
     private JDialog exerciseSelector;
     private JScrollPane exercisesScroll;
     private JList<String> exercisesInJList;
+    private JScrollPane pickExercise;
+    private JList<String> namesToPlay;
+    private JDialog exercisePlayer;
 
 
     // EFFECTS: Constructor sets up window, and button panel.
@@ -58,7 +61,7 @@ public class WorkOutAppUI extends JFrame {
         init();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        initializeGraphics(0);
+        initializeGraphics(1);
         initializeInteraction();
     }
 
@@ -165,7 +168,6 @@ public class WorkOutAppUI extends JFrame {
                 repsField, sets, setsField);
         addExerciseButton = new AddExerciseButton(this, addExercisePanel);
         return addExercisePanel;
-
     }
 
     public void addExerciseSetUp(JPanel addExercisePane, JLabel name, JTextField nameField,
@@ -188,12 +190,13 @@ public class WorkOutAppUI extends JFrame {
 
     }
 
-    // !!!!
+
     public JPanel addWorkOutPane() {
         JPanel addWorkOutPanel = new JPanel();
         JLabel name = new JLabel("Please enter a name for your work out first:");
         workOutToAddNameField = new JTextField(10);
         addWorkOutPanel.setLayout(new BoxLayout(addWorkOutPanel, BoxLayout.Y_AXIS));
+        addWorkOutPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
         addWorkOutPanel.add(name);
         addWorkOutPanel.add(workOutToAddNameField);
         addWorkOutButton(addWorkOutPanel);
@@ -203,8 +206,6 @@ public class WorkOutAppUI extends JFrame {
 
     public void addWorkOutButton(JPanel panel) {
         AddWorkOutToListButton addWorkOutButton = new AddWorkOutToListButton(this, panel);
-        // exercise selector pops up and allows you to pick the exercises one at a time
-        // exercise selector has two buttons: add exercise and add workout
 
     }
 
@@ -213,7 +214,6 @@ public class WorkOutAppUI extends JFrame {
         exerciseSelector = new JDialog();
         exerciseSelector.setLayout(new FlowLayout());
         exercisesScroll = new JScrollPane(exercises);
-        exercisesScroll.setPreferredSize(new Dimension(250, 80));
         JPanel pane = new JPanel();
         exerciseSelector.add(pane);
         exerciseSelector.add(exercisesScroll);
@@ -269,11 +269,60 @@ public class WorkOutAppUI extends JFrame {
         seeStatsButton.activate();
     }
 
-    // !!!!
     public JPanel playExercisePanel() {
-        JPanel playPanel = new JPanel();
-        return playPanel;
 
+        ArrayList<String> allWorkouts = new ArrayList<>();
+        for (Object w : data.getWorkouts()) {
+            WorkOut w1 = (WorkOut) w;
+            String currName = w1.getWorkOutName();
+            allWorkouts.add(currName);
+        }
+        String[] str = new String[allWorkouts.size()];
+        namesToPlay = new JList<String>(allWorkouts.toArray(str));
+        JPanel playPanel = new JPanel();
+        playPanel.setLayout(new BoxLayout(playPanel, BoxLayout.Y_AXIS));
+        playPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
+        pickExercise = new JScrollPane(namesToPlay);
+        playPanel.add(pickExercise);
+        PlaySelectedButton play = new PlaySelectedButton(this, playPanel);
+        return playPanel;
+    }
+
+    // !!! make a JDialog box pop up
+    // need to make play selected button find the right workout
+    // popup will show the intro text then when you press begin, it will go through each set
+    // perhaps can make a countdown?
+    // at the end: great job completing this workout (add image?) and done
+    // add data to person stats after pressing done
+    public JDialog exercisePlayer(WorkOut workOut) {
+        exercisePlayer = new JDialog();
+        exercisePlayer.setLayout(new FlowLayout());
+        JPanel pane = new JPanel();
+        pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
+        exercisePlayer.add(pane);
+
+        JLabel name = new JLabel(workOut.getWorkOutName());
+        JLabel firstLine = new JLabel("Starting " + workOut.getWorkOutName() + " in \n");
+        JLabel line3 = new JLabel("3...");
+        JLabel line2 = new JLabel("2...");
+        JLabel line1 = new JLabel("1...");
+
+        JPanel textPane = new JPanel();
+        textPane.setLayout(new FlowLayout());
+        textPane.add(name);
+        textPane.add(firstLine);
+        textPane.add(line3);
+        textPane.add(line2);
+        textPane.add(line1);
+
+        JPanel buttonPane = new JPanel();
+        buttonPane.setLayout(new FlowLayout());
+
+        NextButton nextButton = new NextButton(this, buttonPane);
+        QuitWorkOut doneButton = new QuitWorkOut(this, buttonPane);
+        exercisePlayer.pack();
+        exercisePlayer.setVisible(true);
+        return exercisePlayer;
     }
 
 
@@ -375,5 +424,17 @@ public class WorkOutAppUI extends JFrame {
 
     public JList getExercisesinJList() {
         return exercisesInJList;
+    }
+
+    public JScrollPane getPickExercise() {
+        return pickExercise;
+    }
+
+    public JList<String> getNamesToPlay() {
+        return namesToPlay;
+    }
+
+    public JDialog getExercisePlayer() {
+        return exercisePlayer;
     }
 }

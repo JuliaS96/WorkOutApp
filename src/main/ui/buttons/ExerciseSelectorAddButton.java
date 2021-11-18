@@ -40,6 +40,8 @@ public class ExerciseSelectorAddButton extends Button {
                 }
             }
         }
+        JOptionPane box = new JOptionPane();
+        box.showMessageDialog(parent,"Exercise added.", "Notification", JOptionPane.PLAIN_MESSAGE);
     }
 }
 
