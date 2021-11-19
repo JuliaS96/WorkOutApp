@@ -53,6 +53,13 @@ public class WorkOutAppUI extends JFrame {
     private JScrollPane pickExercise;
     private JList<String> namesToPlay;
     private JDialog exercisePlayer;
+    private WorkOut currentWorkout = new WorkOut("default");
+    private JPanel textPane;
+    private int setsTotal = 0;
+    private int exercisesTotal = 0;
+    private int setsDone = 0;
+    private int exercisesDone = 0;
+    private JPanel playerPanel;
 
 
     // EFFECTS: Constructor sets up window, and button panel.
@@ -71,9 +78,9 @@ public class WorkOutAppUI extends JFrame {
     private void init() {
         data = new AllWorkOutData();
         Exercise crunches = new Exercise("Crunches",
-                "Lie down and sit half-way up", 4, 1);
+                "Lie down and sit half-way up", 4, 3);
         Exercise sitUps = new Exercise("Sit-ups",
-                "Lie down and sit up", 5, 2);
+                "Lie down and sit up", 5, 3);
         Exercise squats = new Exercise("Squats",
                 "Sit down as if there is an imaginary chair behind you",
                 4, 2);
@@ -292,13 +299,17 @@ public class WorkOutAppUI extends JFrame {
     // at the end: great job completing this workout (add image?) and done
     // add data to person stats after pressing done
     public JDialog exercisePlayer(WorkOut workOut) {
+        currentWorkout = workOut;
+        exercisesTotal = workOut.getExercises().size();
+        Exercise first = (Exercise) workOut.getExercises().get(0);
+        setsTotal = first.getSets();
         exercisePlayer = new JDialog();
         exercisePlayer.setLayout(new FlowLayout());
-        JPanel pane = new JPanel();
-        pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
-        exercisePlayer.add(pane);
+        playerPanel = new JPanel();
+        playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
+        exercisePlayer.add(playerPanel);
 
-        JPanel textPane = getjPanel(workOut);
+        textPane = getjPanel(workOut);
 
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new FlowLayout());
@@ -306,8 +317,8 @@ public class WorkOutAppUI extends JFrame {
         NextButton nextButton = new NextButton(this, buttonPane);
         QuitWorkOut doneButton = new QuitWorkOut(this, buttonPane);
 
-        pane.add(textPane);
-        pane.add(buttonPane);
+        playerPanel.add(textPane);
+        playerPanel.add(buttonPane);
 
         exercisePlayer.pack();
         exercisePlayer.setVisible(true);
@@ -331,6 +342,26 @@ public class WorkOutAppUI extends JFrame {
         return textPane;
     }
 
+    public JPanel exerciseHelper(Exercise exercise, int i) {
+        JPanel performingPanel = new JPanel();
+        performingPanel.setLayout(new BoxLayout(performingPanel, BoxLayout.Y_AXIS));
+        String sets = i + " sets done. " + exercise.getSets() + " sets left.";
+        JLabel  name = new JLabel("Now performing " + exercise.getName() + ".");
+        JLabel difficulty = new JLabel("This exercise is " + exercise.exerciseDifficulty() + "!");
+        JLabel reps = new JLabel("Perform " + exercise.getReps() + " reps of " + exercise.getName() + ".");
+        JLabel description = new JLabel(exercise.getDescription());
+        JLabel setsSent = new JLabel(sets);
+
+        performingPanel.add(name);
+        performingPanel.add(difficulty);
+        performingPanel.add(reps);
+        performingPanel.add(description);
+        performingPanel.add(setsSent);
+
+        return performingPanel;
+
+    }
+
 
     // EFFECTS: if activeTool != null, then mouseClicked
     public void handleMouseClicked(MouseEvent e) {
@@ -339,6 +370,22 @@ public class WorkOutAppUI extends JFrame {
         }
         repaint();
         activeButton.performAction(this);
+    }
+
+    public void increaseSetsDone() {
+        setsDone += 1;
+    }
+
+    public void increaseExercisesDone() {
+        exercisesDone += 1;
+    }
+
+    public void resetSetsDone() {
+        setsDone = 0;
+    }
+
+    public void resetExercisesDone() {
+        setsDone = 0;
     }
 
 
@@ -443,4 +490,34 @@ public class WorkOutAppUI extends JFrame {
     public JDialog getExercisePlayer() {
         return exercisePlayer;
     }
+
+    public WorkOut getCurrentWorkout() {
+        return currentWorkout;
+    }
+
+    public JPanel getTextPane() {
+        return textPane;
+    }
+
+    public JPanel getPlayerPanel() {
+        return playerPanel;
+    }
+
+    public int getSetsDone() {
+        return setsDone;
+    }
+
+    public int getSetsTotal() {
+        return setsTotal;
+    }
+
+    public int getExercisesTotal() {
+        return exercisesTotal;
+    }
+
+    public int getExercisesDone() {
+        return exercisesDone;
+    }
+
+
 }

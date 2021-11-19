@@ -23,7 +23,7 @@ public class PlaySelectedButton extends Button {
 
     @Override
     public void performAction(WorkOutAppUI parent) {
-        WorkOut currentWorkOut = new WorkOut("no workout available");
+        WorkOut currentWorkOut = new WorkOut("no workout selected");
         WorkOutAppUI workOutAppUI = parent;
         AllWorkOutData data = workOutAppUI.getData();
         ArrayList<WorkOut> availableWorkOuts = data.getWorkouts();
@@ -36,7 +36,11 @@ public class PlaySelectedButton extends Button {
             }
         }
 
-        parent.exercisePlayer(currentWorkOut);
+        if (!currentWorkOut.getWorkOutName().equals("no workout selected")) {
+            parent.exercisePlayer(currentWorkOut);
+
+        }
+
 
     }
 
