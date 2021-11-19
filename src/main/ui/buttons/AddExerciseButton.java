@@ -6,20 +6,24 @@ import ui.WorkOutAppUI;
 
 import javax.swing.*;
 
+
 public class AddExerciseButton extends Button {
 
-
-
+    // EFFECTS: creates a new AddExerciseButton and adds it to parent
     public AddExerciseButton(WorkOutAppUI workOutAppUI, JComponent parent) {
         super(workOutAppUI, parent);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a new custom button
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Add Exercise");
+        button = new JButton(" Add Exercise ");
         button = customizeButton(button);
     }
 
+    // MODIFIES: parent
+    // EFFECT: adds workout to the list of workouts
     @Override
     public void performAction(WorkOutAppUI parent) {
         WorkOutAppUI workOutAppUI = parent;

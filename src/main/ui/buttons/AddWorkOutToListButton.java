@@ -16,7 +16,7 @@ public class AddWorkOutToListButton extends Button {
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Exercise Selector");
+        button = new JButton(" Exercise Selector ");
         button = customizeButton(button);
     }
 

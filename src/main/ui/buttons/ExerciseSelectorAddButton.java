@@ -16,7 +16,7 @@ public class ExerciseSelectorAddButton extends Button {
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Add Selected");
+        button = new JButton(" Add Selected ");
         button = customizeButton(button);
     }
 

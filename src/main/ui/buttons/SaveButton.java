@@ -15,7 +15,7 @@ public class SaveButton extends Button {
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Save");
+        button = new JButton(" Save ");
         button = customizeButton(button);
     }
 

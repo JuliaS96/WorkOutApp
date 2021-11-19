@@ -15,7 +15,7 @@ public class SeeStatsButton extends Button {
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("See Your Progress");
+        button = new JButton("See Progress");
         button = customizeButton(button);
     }
 

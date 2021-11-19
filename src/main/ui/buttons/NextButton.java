@@ -16,7 +16,7 @@ public class NextButton extends Button {
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Start!");
+        button = new JButton(" Start! ");
         button = customizeButton(button);
     }
 

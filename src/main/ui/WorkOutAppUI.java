@@ -9,6 +9,7 @@ import ui.buttons.*;
 import ui.buttons.Button;
 
 import javax.swing.*;
+import javax.swing.table.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
@@ -17,8 +18,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Vector;
 
-import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 // Represents the main window in which the work-out app functions
@@ -84,6 +85,9 @@ public class WorkOutAppUI extends JFrame {
         initializeInteraction();
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: sets the theme of the UI
     public void uiManager() {
         UIManager ui = new UIManager();
         ui.put("OptionPane.background", backgroundColor);
@@ -96,6 +100,11 @@ public class WorkOutAppUI extends JFrame {
         ui.put("TextArea.font", (new Font("Arial", Font.PLAIN, 14)));
         ui.put("Button.font", (new Font("Arial", Font.PLAIN, 14)));
         ui.put("TextField.background", lightColor);
+        ui.put("TableHeader.background", lightColor);
+        ui.put("TableHeader.foreground", backgroundColor);
+        ui.put("Table.background", lightColor);
+        ui.put("Table.gridColor", lightColor);
+
         setUndecorated(true);
     }
 
@@ -124,6 +133,8 @@ public class WorkOutAppUI extends JFrame {
         input.useDelimiter("\n");
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes MouseAdapter to be used in the JFrame
     private void initializeInteraction() {
         MouseAdapter mouseAdapter = new MouseAdapter() {
         };
@@ -132,6 +143,7 @@ public class WorkOutAppUI extends JFrame {
 
     // the paint JDesktopPane section was based from stackoverflow :
     // https://stackoverflow.com/questions/13814704/how-to-change-jdesktoppane-default-background-image
+    // MODIFIES: this
     // EFFECTS: draws the JFrame window where the DrawingEditor will operate, and populates the menu buttons
     public void initializeGraphics(int i) {
         desktop = new JDesktopPane() {
@@ -159,14 +171,18 @@ public class WorkOutAppUI extends JFrame {
 
     }
 
-    //Code used from the AlarmSystem application
-    //Effects: Centres main app window on desktop
+    // Code used from the AlarmSystem application
+    // MODIFIES: this
+    // EFFECTS: Centres main app window on desktop
     private void centreOnScreen() {
         int width = Toolkit.getDefaultToolkit().getScreenSize().width;
         int height = Toolkit.getDefaultToolkit().getScreenSize().height;
         setLocation((width - getWidth()) / 2, (height - getHeight()) / 2);
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: creates tabs that are accessible in the JFrame
     public void createTabs(int i) {
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("W",null, statsPane(), null);
@@ -181,6 +197,8 @@ public class WorkOutAppUI extends JFrame {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the See Progress tab
     public JPanel statsPane() {
         Color hiddenColor = new Color(184, 216, 216,  visibility);
         JPanel personStatsPanel = new JPanel();
@@ -209,6 +227,8 @@ public class WorkOutAppUI extends JFrame {
         return personStatsPanel;
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates text attributes for the panes
     public SimpleAttributeSet setTextAttributes() {
         Color hiddenColor = new Color(184, 216, 216,  min(255, visibility + 50));
         SimpleAttributeSet textSettings = new SimpleAttributeSet();
@@ -222,6 +242,8 @@ public class WorkOutAppUI extends JFrame {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the Add Esercise tab
     public JPanel addExercisePane() {
         JPanel addExercisePanel = new JPanel();
         JLabel name = new JLabel("Exercise name:");
@@ -247,6 +269,8 @@ public class WorkOutAppUI extends JFrame {
 
     // From StackOverFlow
     // https://stackoverflow.com/questions/22127833/swing-change-the-jspinner-back-and-fore-colors
+    // MODIFIES: spinner
+    // EFFECTS: sets background of spinners
     public void spinnerEditor(JSpinner spinner) {
         JComponent editor = spinner.getEditor();
         int n = editor.getComponentCount();
@@ -259,7 +283,8 @@ public class WorkOutAppUI extends JFrame {
     }
 
 
-
+    // MODIFIES: this
+    // EFFECTS: layout helper for the add exercise pane
     public void addExerciseSetUp(JPanel addExercisePane, JLabel name, JTextField nameField,
                                  JLabel description, JTextField descriptionField, JLabel reps,
                                  JSpinner repsField, JLabel sets, JSpinner setsField) {
@@ -281,6 +306,8 @@ public class WorkOutAppUI extends JFrame {
     }
 
 
+    // MODIFIES: this
+    // EFFECTS: creates the Add Workout tab
     public JPanel addWorkOutPane() {
         JPanel addWorkOutPanel = new JPanel();
         JLabel name = new JLabel("Please enter a name for your work out first:");
@@ -295,11 +322,15 @@ public class WorkOutAppUI extends JFrame {
 
     }
 
+    // MODIFIES: panel
+    // EFFECTS: adds workout to panel
     public void addWorkOutButton(JPanel panel) {
         AddWorkOutToListButton addWorkOutButton = new AddWorkOutToListButton(this, panel);
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the exercise selection pane in the add workout tab
     public JDialog exerciseSelectorPane(JList<String> exercises) {
         exercisesInJList = exercises;
         exerciseSelector = new JDialog();
@@ -320,25 +351,50 @@ public class WorkOutAppUI extends JFrame {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the exercises tab
     public JPanel exercisesPane() {
         ArrayList<Exercise> exercises = data.getExercises();
         JPanel exercisesPane = new JPanel();
         exercisesPane.setLayout(new BoxLayout(exercisesPane, BoxLayout.Y_AXIS));
         exercisesPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
         exercisesPane.add(Box.createVerticalStrut(5));
-        for (Exercise e : exercises) {
-            JLabel label = new JLabel(String.format("<html><body style=\"text-align: justify;  "
-                            + "text-justify: inter-word;\">%s</body></html>",
-                    e.getName() + ": " + e.getSets() + " sets x " + e.getReps()
-                            + " reps. This exercise is " + e.exerciseDifficulty() + "."));
-            exercisesPane.add(label);
 
-            exercisesPane.add(Box.createVerticalStrut(5));
-        }
-        exercisesPane.setBackground(backgroundColor);
+        JTable exerciseTable = getExerciseTable(exercises, exercisesPane);
+        JScrollPane tablePane = new JScrollPane(exerciseTable);
+
+        tablePane.getViewport().getView().setBackground(lightColor);
+
+        exercisesPane.add(tablePane, BoxLayout.Y_AXIS);
         return exercisesPane;
     }
 
+
+    // EFFECTS: creates a table with the given info
+    private JTable getExerciseTable(ArrayList<Exercise> exercises, JPanel exercisesPane) {
+        Vector<Vector<String>> tableVector = new Vector<Vector<String>>();
+
+        for (Exercise e : exercises) {
+            Vector<String> exercise = new Vector<>();
+            exercise.add(e.getName());
+            exercise.add(e.exerciseDifficulty());
+            exercise.add(Integer.toString(e.getReps()));
+            exercise.add(Integer.toString(e.getSets()));
+            tableVector.add(exercise);
+        }
+        Vector<String> titles = new Vector<>(4);
+        titles.add("Name");
+        titles.add("Reps");
+        titles.add("Sets");
+        titles.add("Difficulty");
+        exercisesPane.setBackground(backgroundColor);
+        TableModel model = new DefaultTableModel(tableVector, titles);
+        JTable exerciseTable = new JTable(model);
+        return exerciseTable;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates the workout tab
     public JPanel workOutsPane() {
         ArrayList<WorkOut> workOuts = data.getWorkouts();
         JPanel workOutsPane = new JPanel();
@@ -354,6 +410,8 @@ public class WorkOutAppUI extends JFrame {
         return workOutsPane;
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the buttons in the main app area
     public void createButtons() {
         JPanel buttonArea = new JPanel();
         QuitButton quitButton;
@@ -376,6 +434,8 @@ public class WorkOutAppUI extends JFrame {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the available workouts to play panel
     public JPanel playExercisePanel() {
 
         ArrayList<String> allWorkouts = new ArrayList<>();
@@ -392,16 +452,14 @@ public class WorkOutAppUI extends JFrame {
         playPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
         pickExercise = new JScrollPane(namesToPlay);
 
-        pickExercise.getViewport().getView().setBackground(lightColor);
         playPanel.add(pickExercise);
         PlaySelectedButton play = new PlaySelectedButton(this, playPanel);
         playPanel.setBackground(backgroundColor);
         return playPanel;
     }
 
-
-
-    // add data to person stats after pressing done
+    // MODIFIES: this
+    // EFFECTS: creates the panel where you go through the workout
     public JDialog exercisePlayer(WorkOut workOut) {
         currentWorkout = workOut;
         exercisesTotal = workOut.getExercises().size();
@@ -430,6 +488,8 @@ public class WorkOutAppUI extends JFrame {
         return exercisePlayer;
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the buttons needed to progress through workout
     private JPanel getButtonPane() {
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new FlowLayout());
@@ -439,6 +499,8 @@ public class WorkOutAppUI extends JFrame {
         return buttonPane;
     }
 
+    // MODIFIES: this
+    // EFFECTS: makes JPanel needed in the workout player
     private JPanel getjPanel(WorkOut workOut) {
         JLabel name = new JLabel(workOut.getWorkOutName());
         JLabel firstLine = new JLabel("Starting " + workOut.getWorkOutName() + " in \n");
@@ -458,6 +520,8 @@ public class WorkOutAppUI extends JFrame {
         return textPane;
     }
 
+    // MODIFIES: this
+    // EFFECTS: produces text in JPanel for each exercise set
     public JPanel exerciseHelper(Exercise exercise, int i) {
         JPanel performingPanel = new JPanel();
         performingPanel.setLayout(new BoxLayout(performingPanel, BoxLayout.Y_AXIS));
@@ -491,26 +555,38 @@ public class WorkOutAppUI extends JFrame {
         activeButton.performAction(this);
     }
 
+    // MODIFIES: this
+    // EFFECTS: increases setsDone by 1
     public void increaseSetsDone() {
         setsDone += 1;
     }
 
+    // MODIFIES: this
+    // EFFECTS: increases exercisesDone by 1
     public void increaseExercisesDone() {
         exercisesDone += 1;
     }
 
+    // MODIFIES: this
+    // EFFECTS: resets setsDone
     public void resetSetsDone() {
         setsDone = 0;
     }
 
+    // MODIFIES: this
+    // EFFECTS: resets exercisesDone
     public void resetExercisesDone() {
         exercisesDone = 0;
     }
 
+    // MODIFIES: this
+    // EFFECTS: resets exercisesTotal to i
     public void resetExercisesTotal(int i) {
         exercisesTotal = i;
     }
 
+    // MODIFIES: this
+    // EFFECTS: resets setsTotal to i
     public void resetSetsTotal(int i) {
         setsTotal = i;
     }
@@ -528,6 +604,7 @@ public class WorkOutAppUI extends JFrame {
         activeButton.performAction(this);
     }
 
+    // EFFECTS: defines the mouse listener to handle mouse click events
     private class WorkOutMouseListener extends MouseAdapter {
 
         // EFFECTS:Forward mouse clicked event to the active button
@@ -569,6 +646,8 @@ public class WorkOutAppUI extends JFrame {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
+
+    // getters and setters
 
     public JTabbedPane getTabs() {
         return tabbedPane;

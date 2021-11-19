@@ -15,7 +15,7 @@ public class StartWorkOutButton extends Button {
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Start WorkOut!");
+        button = new JButton(" Start WorkOut! ");
         button = customizeButton(button);
     }
 

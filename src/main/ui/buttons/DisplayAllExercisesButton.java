@@ -15,7 +15,7 @@ public class DisplayAllExercisesButton extends Button {
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Display Exercise List");
+        button = new JButton("  Exercises Available  ");
         button = customizeButton(button);
     }
 

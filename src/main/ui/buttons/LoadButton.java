@@ -14,7 +14,7 @@ public class LoadButton extends Button {
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Load");
+        button = new JButton(" Load ");
         button = customizeButton(button);
     }
 

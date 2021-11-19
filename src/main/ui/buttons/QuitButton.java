@@ -4,7 +4,7 @@ import ui.WorkOutAppUI;
 
 import javax.swing.*;
 
-public class QuitButton extends Button{
+public class QuitButton extends Button {
 
 
     public QuitButton(WorkOutAppUI workOutAppUI, JComponent parent) {
@@ -13,7 +13,7 @@ public class QuitButton extends Button{
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Quit");
+        button = new JButton(" Quit ");
         button = customizeButton(button);
     }
 

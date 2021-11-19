@@ -13,7 +13,7 @@ public class ExerciseSelectorDoneButton extends Button {
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Done");
+        button = new JButton(" Done ");
         button = customizeButton(button);
     }
 

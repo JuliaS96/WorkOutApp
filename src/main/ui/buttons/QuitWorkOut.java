@@ -12,7 +12,7 @@ public class QuitWorkOut extends Button {
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Quit");
+        button = new JButton(" Quit ");
         button = customizeButton(button);
     }
 

@@ -17,7 +17,7 @@ public class PlaySelectedButton extends Button {
 
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Play Selected");
+        button = new JButton(" Play Selected ");
         button = customizeButton(button);
     }
 
