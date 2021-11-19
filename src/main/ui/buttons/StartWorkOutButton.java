@@ -21,7 +21,6 @@ public class StartWorkOutButton extends Button {
 
     @Override
     public void performAction(WorkOutAppUI parent) {
-        JTabbedPane tabbedPane = parent.getTabs();
-        tabbedPane.setSelectedIndex(5);
+        workOutAppUI.initializeGraphics(5);
     }
 }

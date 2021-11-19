@@ -23,8 +23,9 @@ public class SaveButton extends Button {
     public void performAction(WorkOutAppUI parent) {
         parent.saveProgress();
         JOptionPane box = new JOptionPane();
+        box.setBackground(parent.getBackgroundColor());
         box.showMessageDialog(parent,"Data saved to file.", "Notification", JOptionPane.PLAIN_MESSAGE);
-        workOutAppUI.initializeGraphics(0);
+
 
     }
 

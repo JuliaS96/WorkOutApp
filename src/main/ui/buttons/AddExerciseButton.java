@@ -2,7 +2,6 @@ package ui.buttons;
 
 import model.AllWorkOutData;
 import model.Exercise;
-import model.WorkOut;
 import ui.WorkOutAppUI;
 
 import javax.swing.*;
@@ -33,6 +32,7 @@ public class AddExerciseButton extends Button {
         data.getExercises().add(exercise);
         System.out.println("done");
         JOptionPane box = new JOptionPane();
+        box.setBackground(parent.getBackgroundColor());
         box.showMessageDialog(parent,"Exercise added.", "Notification", JOptionPane.PLAIN_MESSAGE);
         workOutAppUI.initializeGraphics(1);
 

@@ -6,6 +6,7 @@ import model.WorkOut;
 import ui.WorkOutAppUI;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class NextButton extends Button {
 
@@ -73,9 +74,11 @@ public class NextButton extends Button {
         parent.resetExercisesDone();
         parent.getExercisePlayer().setVisible(false);
         JOptionPane box = new JOptionPane();
+        box.setBackground(new Color(205,205,180));
         box.showMessageDialog(parent, "Great job completing this workout!",
                 "Notification", JOptionPane.PLAIN_MESSAGE);
         ps.addCompletedWorkout();
+        parent.setVisibility(50);
     }
 
 }

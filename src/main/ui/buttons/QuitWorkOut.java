@@ -21,6 +21,7 @@ public class QuitWorkOut extends Button {
         parent.getExercisePlayer().setVisible(false);
         workOutAppUI.initializeGraphics(1);
         JOptionPane box = new JOptionPane();
+        box.setBackground(parent.getBackgroundColor());
         box.showMessageDialog(parent, "Better luck next time!", "Notification", JOptionPane.PLAIN_MESSAGE);
 
 

@@ -22,8 +22,9 @@ public class LoadButton extends Button {
     public void performAction(WorkOutAppUI parent) {
         parent.loadProgress();
         JOptionPane box = new JOptionPane();
+        box.setBackground(parent.getBackgroundColor());
         box.showMessageDialog(parent,"Data loaded from file.", "Notification", JOptionPane.PLAIN_MESSAGE);
-        workOutAppUI.initializeGraphics(1);
+        workOutAppUI.initializeGraphics(0);
 
     }
 

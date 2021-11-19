@@ -21,9 +21,8 @@ public class SeeStatsButton extends Button {
 
     @Override
     public void performAction(WorkOutAppUI parent) {
-        JTabbedPane tabbedPane = parent.getTabs();
         workOutAppUI.initializeGraphics(0);
-        tabbedPane.setSelectedIndex(0);
+
 
     }
 
