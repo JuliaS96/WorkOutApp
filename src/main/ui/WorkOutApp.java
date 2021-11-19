@@ -257,7 +257,7 @@ public class WorkOutApp {
             java.lang.System.exit(0);
         } else {
             for (int i = 0; i < exercise.getReps(); i++) {
-                data.getPersonStats().addCompletedReps();
+                data.getPersonStats().addCompletedReps(rp);
             }
         }
 

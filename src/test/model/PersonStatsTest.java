@@ -22,10 +22,10 @@ class PersonStatsTest {
 
     @Test
     void testAddCompletedReps() {
-        testPersonStats.addCompletedReps();
-        assertEquals(1, testPersonStats.getCompletedReps());
-        testPersonStats.addCompletedReps();
-        testPersonStats.addCompletedReps();
+        testPersonStats.addCompletedReps(0);
+        assertEquals(0, testPersonStats.getCompletedReps());
+        testPersonStats.addCompletedReps(1);
+        testPersonStats.addCompletedReps(2);
         assertEquals(3, testPersonStats.getCompletedReps());
     }
 

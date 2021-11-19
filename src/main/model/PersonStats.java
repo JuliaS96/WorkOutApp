@@ -23,9 +23,9 @@ public class PersonStats implements Writeable {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds a rep to completed reps
-    public void addCompletedReps() {
-        completedReps = completedReps + 1;
+    // EFFECTS: adds i reps to completed reps
+    public void addCompletedReps(int reps) {
+        completedReps = completedReps + reps;
     }
 
     // EFFECTS: returns completed workouts

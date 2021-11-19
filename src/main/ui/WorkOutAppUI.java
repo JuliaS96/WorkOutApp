@@ -318,7 +318,7 @@ public class WorkOutAppUI extends JFrame {
         QuitWorkOut doneButton = new QuitWorkOut(this, buttonPane);
 
         playerPanel.add(textPane);
-        playerPanel.add(buttonPane);
+        exercisePlayer.add(buttonPane);
 
         exercisePlayer.pack();
         exercisePlayer.setVisible(true);
@@ -385,7 +385,7 @@ public class WorkOutAppUI extends JFrame {
     }
 
     public void resetExercisesDone() {
-        setsDone = 0;
+        exercisesDone = 0;
     }
 
 
