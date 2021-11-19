@@ -11,6 +11,8 @@ public class QuitButton extends Button {
         super(workOutAppUI, parent);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a new custom button
     @Override
     protected void createButton(JComponent parent) {
         button = new JButton(" Quit ");
