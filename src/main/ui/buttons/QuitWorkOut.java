@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class QuitWorkOut extends Button {
 
+    // EFFECTS: creates a new QuitWorkOut and adds it to parent
     public QuitWorkOut(WorkOutAppUI workOutAppUI, JComponent parent) {
         super(workOutAppUI, parent);
     }

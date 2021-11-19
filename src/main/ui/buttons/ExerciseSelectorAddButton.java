@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class ExerciseSelectorAddButton extends Button {
 
+    // EFFECTS: creates a new ExerciseSelectorAddButton and adds it to parent
     public ExerciseSelectorAddButton(WorkOutAppUI workOutAppUI, JComponent parent) {
         super(workOutAppUI, parent);
     }
@@ -29,7 +30,7 @@ public class ExerciseSelectorAddButton extends Button {
         ArrayList<WorkOut> workOuts = data.getWorkouts();
         ArrayList<Exercise> exercises = data.getExercises();
         String currentWorkOutName = parent.getWorkOutNameToAdd().getText();
-        JList<String> exercisesInJList = parent.getExercisesinJList();
+        JList<String> exercisesInJList = parent.getExercisesInJList();
         String currentExerciseName = (String)(exercisesInJList.getSelectedValue());
 
         for (Exercise e : exercises) {

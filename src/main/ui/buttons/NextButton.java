@@ -10,6 +10,7 @@ import java.awt.*;
 
 public class NextButton extends Button {
 
+    // EFFECTS: creates a new NextButton and adds it to parent
     public NextButton(WorkOutAppUI workOutAppUI, JComponent parent) {
         super(workOutAppUI, parent);
     }

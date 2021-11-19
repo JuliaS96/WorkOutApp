@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class PlaySelectedButton extends Button {
 
+    // EFFECTS: creates a new PlaySelectedButton and adds it to parent
     public PlaySelectedButton(WorkOutAppUI workOutAppUI, JComponent parent) {
         super(workOutAppUI, parent);
     }

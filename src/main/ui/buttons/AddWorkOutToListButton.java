@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class AddWorkOutToListButton extends Button {
 
+    // EFFECTS: creates a new AddWorkOutToListButton and adds it to parent
     public AddWorkOutToListButton(WorkOutAppUI workOutAppUI, JComponent parent) {
         super(workOutAppUI, parent);
     }

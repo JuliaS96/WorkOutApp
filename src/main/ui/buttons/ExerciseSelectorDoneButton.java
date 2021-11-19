@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class ExerciseSelectorDoneButton extends Button {
 
+    // EFFECTS: creates a new ExerciseSelectorDoneButton and adds it to parent
     public ExerciseSelectorDoneButton(WorkOutAppUI workOutAppUI, JComponent parent) {
         super(workOutAppUI, parent);
     }

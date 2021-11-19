@@ -8,6 +8,7 @@ public class LoadButton extends Button {
     private static final int WIDTH = 60;
     private static final int HEIGHT = 80;
 
+    // EFFECTS: creates a new LoadButton and adds it to parent
     public LoadButton(WorkOutAppUI workOutAppUI, JComponent parent) {
         super(workOutAppUI, parent);
     }

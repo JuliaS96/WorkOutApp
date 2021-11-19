@@ -9,6 +9,7 @@ public class SeeStatsButton extends Button {
     private static final int HEIGHT = 800;
     private PersonStats personStats;
 
+    // EFFECTS: creates a new SeeStatsButton and adds it to parent
     public SeeStatsButton(WorkOutAppUI workOutAppUI, JComponent parent) {
         super(workOutAppUI, parent);
     }

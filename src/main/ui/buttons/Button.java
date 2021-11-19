@@ -16,6 +16,7 @@ public abstract class Button {
     protected WorkOutAppUI workOutAppUI;
     private boolean active;
 
+    // EFFECTS: creates a new Button and adds it to parent
     public Button(WorkOutAppUI workOutAppUI, JComponent parent) {
         this.workOutAppUI = workOutAppUI;
         createButton(parent);

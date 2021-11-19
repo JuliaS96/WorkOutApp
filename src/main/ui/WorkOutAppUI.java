@@ -243,7 +243,7 @@ public class WorkOutAppUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates the Add Esercise tab
+    // EFFECTS: creates the Add Exercise tab
     public JPanel addExercisePane() {
         JPanel addExercisePanel = new JPanel();
         JLabel name = new JLabel("Exercise name:");
@@ -677,11 +677,11 @@ public class WorkOutAppUI extends JFrame {
         return exerciseSelector;
     }
 
-    public JScrollPane getScroller() {
+    public JScrollPane getScroll() {
         return exercisesScroll;
     }
 
-    public JList getExercisesinJList() {
+    public JList getExercisesInJList() {
         return exercisesInJList;
     }
 

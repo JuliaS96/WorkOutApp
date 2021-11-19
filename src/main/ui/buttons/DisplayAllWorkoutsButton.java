@@ -8,7 +8,7 @@ public class DisplayAllWorkoutsButton extends Button {
     private static final int WIDTH = 60;
     private static final int HEIGHT = 80;
 
-
+    // EFFECTS: creates a new DisplayAllWorkoutsButton and adds it to parent
     public DisplayAllWorkoutsButton(WorkOutAppUI workOutAppUI, JComponent parent) {
         super(workOutAppUI, parent);
     }
