@@ -22,42 +22,46 @@ public class NextButton extends Button {
     @Override
     public void performAction(WorkOutAppUI parent) {
         int exercisesDone = parent.getExercisesDone();
-        int exercisesTotal = parent.getExercisesTotal();
         int setsDone = parent.getSetsDone();
         int setsTotal = parent.getSetsTotal();
         PersonStats ps = parent.getData().getPersonStats();
 
         parent.getExercisePlayer().setVisible(true);
         WorkOut currentWorkout = parent.getCurrentWorkout();
+        int exercisesTotal = currentWorkout.getExercises().size();
         Exercise currentExercise = (Exercise) currentWorkout.getExercises().get(0);
+        parent.resetSetsTotal(currentExercise.getSets());
         JPanel currentPanel;
         parent.getPlayerPanel().removeAll();
 
-        if (setsTotal - 1 > parent.getSetsDone()) {
-            currentExercise = (Exercise) currentWorkout.getExercises().get(exercisesDone);
-            currentPanel = parent.exerciseHelper(currentExercise, setsDone);
-            parent.increaseSetsDone();
-            parent.getPlayerPanel().add(currentPanel,0);
-            ps.addCompletedReps(currentExercise.getReps());
-        } else if (exercisesTotal - 1 > exercisesDone) {
+        if (exercisesTotal == exercisesDone) {
             parent.resetSetsDone();
-            parent.increaseExercisesDone();
-            currentExercise = (Exercise) currentWorkout.getExercises().get(exercisesDone);
-            currentPanel = parent.exerciseHelper(currentExercise, setsDone);
-            parent.getPlayerPanel().add(currentPanel,0);
-        } else {
+            parent.resetExercisesDone();
             parent.getExercisePlayer().setVisible(false);
             JOptionPane box = new JOptionPane();
             box.showMessageDialog(parent, "Great job completing this workout!",
                     "Notification", JOptionPane.PLAIN_MESSAGE);
-            parent.resetSetsDone();
-            parent.resetExercisesDone();
             ps.addCompletedWorkout();
+        } else if (setsTotal - 1 > parent.getSetsDone()) {
+            currentExercise = (Exercise) currentWorkout.getExercises().get(exercisesDone);
+            parent.resetSetsTotal(currentExercise.getSets());
+            currentPanel = parent.exerciseHelper(currentExercise, setsDone);
+            parent.increaseSetsDone();
+            parent.getPlayerPanel().add(currentPanel, 0);
+            ps.addCompletedReps(currentExercise.getReps());
+        } else {
+            parent.resetSetsDone();
+            currentExercise = (Exercise) currentWorkout.getExercises().get(exercisesDone);
+            parent.resetSetsTotal(currentExercise.getSets());
+            parent.increaseExercisesDone();
+            setsTotal = currentExercise.getSets();
+            currentPanel = parent.exerciseHelper(currentExercise, setsDone);
+            parent.getPlayerPanel().add(currentPanel, 0);
         }
 
-        parent.getPlayerPanel().repaint();
+        parent.getExercisePlayer().pack();
         System.out.println(currentExercise.getName() + exercisesDone + " "
-                 + exercisesTotal + " " + " " + setsDone + " " + setsTotal);
+                + exercisesTotal + " " + " " + setsDone + " " + setsTotal);
     }
 
 }

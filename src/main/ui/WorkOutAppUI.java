@@ -114,6 +114,7 @@ public class WorkOutAppUI extends JFrame {
         centreOnScreen();
         setVisible(true);
         createTabs(i);
+
     }
 
     //Code used from the AlarmSystem application
@@ -227,7 +228,10 @@ public class WorkOutAppUI extends JFrame {
         ExerciseSelectorAddButton addButton = new ExerciseSelectorAddButton(this, pane);
         ExerciseSelectorDoneButton doneButton = new ExerciseSelectorDoneButton(this, pane);
         exerciseSelector.pack();
+        exerciseSelector.setLocationRelativeTo(null);
+
         exerciseSelector.setVisible(true);
+
         return exerciseSelector;
 
     }
@@ -239,8 +243,10 @@ public class WorkOutAppUI extends JFrame {
         exercisesPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
         exercisesPane.add(Box.createVerticalStrut(5));
         for (Exercise e : exercises) {
-            JLabel label = new JLabel(e.getName());
+            JLabel label = new JLabel(e.getName() + ": " + e.getSets() + " sets x "
+                    + e.getReps() + " reps. This exercise is " + e.exerciseDifficulty() + ".");
             exercisesPane.add(label);
+
             exercisesPane.add(Box.createVerticalStrut(5));
         }
         return exercisesPane;
@@ -304,10 +310,11 @@ public class WorkOutAppUI extends JFrame {
         Exercise first = (Exercise) workOut.getExercises().get(0);
         setsTotal = first.getSets();
         exercisePlayer = new JDialog();
-        exercisePlayer.setLayout(new FlowLayout());
+        JPanel layoutManager = new JPanel();
+        layoutManager.setLayout(new BoxLayout(layoutManager, BoxLayout.X_AXIS));
         playerPanel = new JPanel();
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
-        exercisePlayer.add(playerPanel);
+        layoutManager.add(playerPanel);
 
         textPane = getjPanel(workOut);
 
@@ -318,10 +325,12 @@ public class WorkOutAppUI extends JFrame {
         QuitWorkOut doneButton = new QuitWorkOut(this, buttonPane);
 
         playerPanel.add(textPane);
-        exercisePlayer.add(buttonPane);
+        layoutManager.add(buttonPane);
+        exercisePlayer.add(layoutManager);
 
         exercisePlayer.pack();
         exercisePlayer.setVisible(true);
+        exercisePlayer.setLocationRelativeTo(null);
         return exercisePlayer;
     }
 
@@ -339,6 +348,7 @@ public class WorkOutAppUI extends JFrame {
         textPane.add(line3);
         textPane.add(line2);
         textPane.add(line1);
+        textPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
         return textPane;
     }
 
@@ -346,7 +356,7 @@ public class WorkOutAppUI extends JFrame {
         JPanel performingPanel = new JPanel();
         performingPanel.setLayout(new BoxLayout(performingPanel, BoxLayout.Y_AXIS));
         String sets = i + " sets done. " + exercise.getSets() + " sets left.";
-        JLabel  name = new JLabel("Now performing " + exercise.getName() + ".");
+        JLabel name = new JLabel("Now performing " + exercise.getName() + ".");
         JLabel difficulty = new JLabel("This exercise is " + exercise.exerciseDifficulty() + "!");
         JLabel reps = new JLabel("Perform " + exercise.getReps() + " reps of " + exercise.getName() + ".");
         JLabel description = new JLabel(exercise.getDescription());
@@ -357,6 +367,8 @@ public class WorkOutAppUI extends JFrame {
         performingPanel.add(reps);
         performingPanel.add(description);
         performingPanel.add(setsSent);
+
+        performingPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
 
         return performingPanel;
 
@@ -386,6 +398,14 @@ public class WorkOutAppUI extends JFrame {
 
     public void resetExercisesDone() {
         exercisesDone = 0;
+    }
+
+    public void resetExercisesTotal(int i) {
+        exercisesTotal = i;
+    }
+
+    public void resetSetsTotal(int i) {
+        setsTotal = i;
     }
 
 

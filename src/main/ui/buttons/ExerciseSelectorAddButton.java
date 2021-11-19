@@ -22,6 +22,7 @@ public class ExerciseSelectorAddButton extends Button {
 
     @Override
     public void performAction(WorkOutAppUI parent) {
+        parent.getExerciseSelector().setVisible(true);
         Exercise currentExercise;
         WorkOutAppUI workOutAppUI = parent;
         AllWorkOutData data = workOutAppUI.getData();
@@ -30,6 +31,7 @@ public class ExerciseSelectorAddButton extends Button {
         String currentWorkOutName = parent.getWorkOutNameToAdd().getText();
         JList<String> exercisesInJList = parent.getExercisesinJList();
         String currentExerciseName = (String)(exercisesInJList.getSelectedValue());
+
         for (Exercise e : exercises) {
             if (e.getName().equals(currentExerciseName)) {
                 currentExercise = e;
@@ -40,8 +42,9 @@ public class ExerciseSelectorAddButton extends Button {
                 }
             }
         }
-        JOptionPane box = new JOptionPane();
-        box.showMessageDialog(parent,"Exercise added.", "Notification", JOptionPane.PLAIN_MESSAGE);
+
+       //JOptionPane box = new JOptionPane();
+       // box.showMessageDialog(parent,"Exercise added.", "Notification", JOptionPane.PLAIN_MESSAGE);
     }
 }
 
