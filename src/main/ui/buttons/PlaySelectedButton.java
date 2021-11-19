@@ -24,6 +24,9 @@ public class PlaySelectedButton extends Button {
         button = customizeButton(button);
     }
 
+    // MODIFIES: parent
+    // EFFECT: initializes the workout pane with current workout if one is selected
+    //         otherwise do nothing
     @Override
     public void performAction(WorkOutAppUI parent) {
         WorkOut currentWorkOut = new WorkOut("no workout selected");

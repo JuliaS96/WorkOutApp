@@ -21,6 +21,8 @@ public class StartWorkOutButton extends Button {
         button = customizeButton(button);
     }
 
+
+    // EFFECT: switches to start workout pane
     @Override
     public void performAction(WorkOutAppUI parent) {
         workOutAppUI.initializeGraphics(5);

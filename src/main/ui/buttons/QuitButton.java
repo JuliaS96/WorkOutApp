@@ -19,10 +19,11 @@ public class QuitButton extends Button {
         button = customizeButton(button);
     }
 
+
+    // EFFECT: quits app
     @Override
     public void performAction(WorkOutAppUI parent) {
         System.exit(0);
-
 
     }
 

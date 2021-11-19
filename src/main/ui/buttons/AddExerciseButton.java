@@ -23,7 +23,7 @@ public class AddExerciseButton extends Button {
     }
 
     // MODIFIES: parent
-    // EFFECT: adds workout to the list of workouts
+    // EFFECT: adds exercise to the list of exercises
     @Override
     public void performAction(WorkOutAppUI parent) {
         WorkOutAppUI workOutAppUI = parent;

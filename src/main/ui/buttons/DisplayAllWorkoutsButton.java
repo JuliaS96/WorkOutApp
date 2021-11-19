@@ -21,11 +21,11 @@ public class DisplayAllWorkoutsButton extends Button {
         button = customizeButton(button);
     }
 
+
+    // EFFECT: goes to list of workouts pane
     @Override
     public void performAction(WorkOutAppUI parent) {
         JTabbedPane tabbedPane = parent.getTabs();
         workOutAppUI.initializeGraphics(4);
-
-
     }
 }

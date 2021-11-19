@@ -21,6 +21,7 @@ public class AddNewExerciseButton extends Button {
         button = customizeButton(button);
     }
 
+    // EFFECT: goes to add new exercise pane
     @Override
     public void performAction(WorkOutAppUI parent) {
         JTabbedPane tabbedPane = parent.getTabs();

@@ -19,6 +19,8 @@ public class QuitWorkOut extends Button {
         button = customizeButton(button);
     }
 
+
+    // EFFECT: quits workout and goes to exercise selection pane
     @Override
     public void performAction(WorkOutAppUI parent) {
         parent.getExercisePlayer().setVisible(false);

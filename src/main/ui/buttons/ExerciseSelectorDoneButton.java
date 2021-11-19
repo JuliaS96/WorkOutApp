@@ -19,6 +19,8 @@ public class ExerciseSelectorDoneButton extends Button {
         button = customizeButton(button);
     }
 
+    // MODIFIES: parent
+    // EFFECT: closes pane when workout has been added and displays message
     @Override
     public void performAction(WorkOutAppUI parent) {
         parent.getExerciseSelector().setVisible(false);

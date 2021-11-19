@@ -21,6 +21,8 @@ public class SaveButton extends Button {
         button = customizeButton(button);
     }
 
+    // MODIFIES: parent
+    // EFFECT: saves current data
     @Override
     public void performAction(WorkOutAppUI parent) {
         parent.saveProgress();

@@ -23,6 +23,8 @@ public class ExerciseSelectorAddButton extends Button {
         button = customizeButton(button);
     }
 
+    // MODIFIES: parent
+    // EFFECT: adds selected exercise to the current workout
     @Override
     public void performAction(WorkOutAppUI parent) {
         parent.getExerciseSelector().setVisible(true);

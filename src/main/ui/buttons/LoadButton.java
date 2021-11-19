@@ -21,6 +21,8 @@ public class LoadButton extends Button {
         button = customizeButton(button);
     }
 
+    // MODIFIES: parent
+    // EFFECT: loads data from file
     @Override
     public void performAction(WorkOutAppUI parent) {
         parent.loadProgress();

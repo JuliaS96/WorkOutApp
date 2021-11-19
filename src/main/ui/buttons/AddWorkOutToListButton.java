@@ -23,6 +23,8 @@ public class AddWorkOutToListButton extends Button {
         button = customizeButton(button);
     }
 
+    // MODIFIES: parent
+    // EFFECT: adds workout to the list of workouts
     @Override
     public void performAction(WorkOutAppUI parent) {
         WorkOutAppUI workOutAppUI = parent;

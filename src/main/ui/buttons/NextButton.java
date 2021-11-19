@@ -23,6 +23,9 @@ public class NextButton extends Button {
         button = customizeButton(button);
     }
 
+    // MODIFIES: parent
+    // EFFECT: starts playing workout;
+    //         adds reps to reps completed and adds workout when done
     @Override
     public void performAction(WorkOutAppUI parent) {
         int exercisesDone = parent.getExercisesDone();
@@ -52,6 +55,8 @@ public class NextButton extends Button {
 
     }
 
+    // MODIFIES: parent
+    // EFFECT: adds reps to reps completed and moves on to next exercise
     private int playNextExerciseSet(WorkOutAppUI parent, int setsDone, Exercise currentExercise) {
         JPanel currentPanel;
         int setsTotal;
@@ -63,6 +68,8 @@ public class NextButton extends Button {
         return setsTotal;
     }
 
+    // MODIFIES: parent
+    // EFFECT: adds reps to reps completed and moves on to next set
     private void playNextSet(WorkOutAppUI parent, int setsDone, PersonStats ps, Exercise currentExercise) {
         JPanel currentPanel;
         parent.resetSetsTotal(currentExercise.getSets());
@@ -72,6 +79,9 @@ public class NextButton extends Button {
         ps.addCompletedReps(currentExercise.getReps());
     }
 
+    // MODIFIES: parent
+    // EFFECT: closes the window if the workout has been completed and adds a workout
+    //         to completed workouts
     private void closeWindowAndReset(WorkOutAppUI parent, PersonStats ps) {
         parent.resetSetsDone();
         parent.resetExercisesDone();

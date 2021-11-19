@@ -22,10 +22,10 @@ public class SeeStatsButton extends Button {
         button = customizeButton(button);
     }
 
+    // EFFECT: switches to stats pane
     @Override
     public void performAction(WorkOutAppUI parent) {
         workOutAppUI.initializeGraphics(0);
-
 
     }
 
