@@ -31,7 +31,9 @@ public class WorkOutAppUI extends JFrame {
     private Exercise defaultExercise;
     private WorkOut fullBody;
     private Scanner input;
-    private Color backgroundColor = new Color(246, 223, 191, 255);
+    private Color backgroundColor = new Color(122, 158, 159, 255);
+    private Color mediumColor = new Color(184, 216, 216, 255);
+    private Color lightColor = new Color(238, 245, 219, 255);
     int visibility = 255;
     int bananaHeight = (int) Math.round(HEIGHT * 0.9);
     int bananaWidth = (int) Math.round(WIDTH * 0.95);
@@ -85,14 +87,16 @@ public class WorkOutAppUI extends JFrame {
     public void uiManager() {
         UIManager ui = new UIManager();
         ui.put("OptionPane.background", backgroundColor);
-        ui.put("OptionPane.font",(new Font("Arial", Font.PLAIN, 14)));
+        ui.put("OptionPane.font", (new Font("Arial", Font.PLAIN, 14)));
         ui.put("Panel.background", backgroundColor);
         ui.put("Panel.font", (new Font("Arial", Font.PLAIN, 14)));
         ui.put("TextPane.font", (new Font("Arial", Font.PLAIN, 14)));
         ui.put("TextPane.background", backgroundColor);
         ui.put("TextArea.background", backgroundColor);
-        ui.put("TextArea.font",(new Font("Arial", Font.PLAIN, 14)));
+        ui.put("TextArea.font", (new Font("Arial", Font.PLAIN, 14)));
         ui.put("Button.font", (new Font("Arial", Font.PLAIN, 14)));
+        ui.put("TextField.background", lightColor);
+        setUndecorated(true);
     }
 
     // Code used from init() in Teller App Code and modified as needed
@@ -165,20 +169,20 @@ public class WorkOutAppUI extends JFrame {
 
     public void createTabs(int i) {
         tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Your Stats", null, statsPane(), null);
-        tabbedPane.addTab("Add Exercise", null, addExercisePane(), null);
-        tabbedPane.addTab("Add Workout", null, addWorkOutPane(), null);
-        tabbedPane.addTab("Exercises", null, exercisesPane(), null);
-        tabbedPane.addTab("WorkOuts", null, workOutsPane(), null);
-        tabbedPane.addTab("Play!", null, playExercisePanel(), null);
-        add(tabbedPane);
-        tabbedPane.setBackground(new Color(0, 0, 0, 0));
+        tabbedPane.addTab("W",null, statsPane(), null);
+        tabbedPane.addTab("O", null, addExercisePane(), null);
+        tabbedPane.addTab("R", null, addWorkOutPane(), null);
+        tabbedPane.addTab("K", null, exercisesPane(), null);
+        tabbedPane.addTab("I", null, workOutsPane(), null);
+        tabbedPane.addTab("T", null, playExercisePanel(), null);
+        add(tabbedPane,  BorderLayout.CENTER);
+        tabbedPane.setBackground(lightColor);
         tabbedPane.setSelectedIndex(i);
 
     }
 
     public JPanel statsPane() {
-        Color hiddenColor = new Color(246, 215, 194, visibility);
+        Color hiddenColor = new Color(184, 216, 216,  visibility);
         JPanel personStatsPanel = new JPanel();
         int reps = data.getPersonStats().getCompletedReps();
         int workouts = data.getPersonStats().getCompletedWorkouts();
@@ -206,7 +210,7 @@ public class WorkOutAppUI extends JFrame {
     }
 
     public SimpleAttributeSet setTextAttributes() {
-        Color hiddenColor = new Color(246, 215, 194, min(255, visibility + 50));
+        Color hiddenColor = new Color(184, 216, 216,  min(255, visibility + 50));
         SimpleAttributeSet textSettings = new SimpleAttributeSet();
         StyleConstants.setBackground(textSettings, hiddenColor);
         StyleConstants.setSpaceAbove(textSettings, 5);
@@ -230,6 +234,9 @@ public class WorkOutAppUI extends JFrame {
         modelSets = new SpinnerNumberModel(1, 1, 10, 1);
         JSpinner repsField = new JSpinner(modelReps);
         JSpinner setsField = new JSpinner(modelSets);
+        spinnerEditor(repsField);
+        spinnerEditor(setsField);
+
         addExercisePanel.setLayout(new BoxLayout(addExercisePanel, BoxLayout.Y_AXIS));
         addExercisePanel.setBackground(backgroundColor);
         addExerciseSetUp(addExercisePanel, name, nameField, description, descriptionField, reps,
@@ -237,6 +244,21 @@ public class WorkOutAppUI extends JFrame {
         addExerciseButton = new AddExerciseButton(this, addExercisePanel);
         return addExercisePanel;
     }
+
+    // From StackOverFlow
+    // https://stackoverflow.com/questions/22127833/swing-change-the-jspinner-back-and-fore-colors
+    public void spinnerEditor(JSpinner spinner) {
+        JComponent editor = spinner.getEditor();
+        int n = editor.getComponentCount();
+        for (int i = 0; i < n; i++) {
+            Component c = editor.getComponent(i);
+            if (c instanceof JTextField) {
+                c.setBackground(lightColor);
+            }
+        }
+    }
+
+
 
     public void addExerciseSetUp(JPanel addExercisePane, JLabel name, JTextField nameField,
                                  JLabel description, JTextField descriptionField, JLabel reps,
@@ -309,7 +331,6 @@ public class WorkOutAppUI extends JFrame {
                             + "text-justify: inter-word;\">%s</body></html>",
                     e.getName() + ": " + e.getSets() + " sets x " + e.getReps()
                             + " reps. This exercise is " + e.exerciseDifficulty() + "."));
-
             exercisesPane.add(label);
 
             exercisesPane.add(Box.createVerticalStrut(5));
@@ -335,8 +356,9 @@ public class WorkOutAppUI extends JFrame {
 
     public void createButtons() {
         JPanel buttonArea = new JPanel();
+        QuitButton quitButton;
         buttonArea.setLayout(new GridLayout(0, 1));
-        buttonArea.setSize(new Dimension(0, 0));
+        buttonArea.setSize(new Dimension(10, 0));
         add(buttonArea, BorderLayout.WEST);
         seeStatsButton = new SeeStatsButton(this, buttonArea);
         startWorkOutButton = new StartWorkOutButton(this, buttonArea);
@@ -346,10 +368,10 @@ public class WorkOutAppUI extends JFrame {
         displayAllWorkoutsButton = new DisplayAllWorkoutsButton(this, buttonArea);
         loadButton = new LoadButton(this, buttonArea);
         saveButton = new SaveButton(this, buttonArea);
+        quitButton = new QuitButton(this, buttonArea);
         seeStatsButton.activate();
 
         buttonArea.setBackground(backgroundColor);
-
 
 
     }
@@ -369,6 +391,8 @@ public class WorkOutAppUI extends JFrame {
         playPanel.setLayout(new BoxLayout(playPanel, BoxLayout.Y_AXIS));
         playPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
         pickExercise = new JScrollPane(namesToPlay);
+
+        pickExercise.getViewport().getView().setBackground(lightColor);
         playPanel.add(pickExercise);
         PlaySelectedButton play = new PlaySelectedButton(this, playPanel);
         playPanel.setBackground(backgroundColor);
@@ -376,7 +400,7 @@ public class WorkOutAppUI extends JFrame {
     }
 
 
-    // at the end: great job completing this workout (add image?) and done
+
     // add data to person stats after pressing done
     public JDialog exercisePlayer(WorkOut workOut) {
         currentWorkout = workOut;
@@ -629,6 +653,10 @@ public class WorkOutAppUI extends JFrame {
 
     public void setVisibility(int i) {
         visibility = i;
+    }
+
+    public Color getLightColor() {
+        return lightColor;
     }
 
 

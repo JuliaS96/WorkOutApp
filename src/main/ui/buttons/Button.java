@@ -3,6 +3,7 @@ package ui.buttons;
 import ui.WorkOutAppUI;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -20,6 +21,8 @@ public abstract class Button {
         addToParent(parent);
         active = false;
         addListener();
+        button.setBorder(new LineBorder(workOutAppUI.getLightColor()));
+
     }
 
     // Code based from SimpleDrawingEditor Tool class
