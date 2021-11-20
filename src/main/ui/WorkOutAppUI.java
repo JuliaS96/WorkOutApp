@@ -9,9 +9,12 @@ import ui.buttons.*;
 import ui.buttons.Button;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.table.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
+import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
@@ -283,6 +286,15 @@ public class WorkOutAppUI extends JFrame {
         }
     }
 
+    // MODIFIES: scroller
+    // EFFECTS: sets look of scrollers
+    public void scrollEditor(JScrollPane scroller) {
+        scroller.getViewport().getView().setBackground(lightColor);
+        scroller.getViewport().getView().setForeground(backgroundColor);
+        scroller.getViewport().getView().setFont(new Font("Arial",Font.BOLD,14));
+
+    }
+
 
     // MODIFIES: this
     // EFFECTS: layout helper for the add exercise pane
@@ -339,6 +351,7 @@ public class WorkOutAppUI extends JFrame {
         exercisesScroll = new JScrollPane(exercises);
         JPanel pane = new JPanel();
         exerciseSelector.add(pane);
+        scrollEditor(exercisesScroll);
         exerciseSelector.add(exercisesScroll);
         ExerciseSelectorAddButton addButton = new ExerciseSelectorAddButton(this, pane);
         ExerciseSelectorDoneButton doneButton = new ExerciseSelectorDoneButton(this, pane);
@@ -452,7 +465,17 @@ public class WorkOutAppUI extends JFrame {
         playPanel.setLayout(new BoxLayout(playPanel, BoxLayout.Y_AXIS));
         playPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
         pickExercise = new JScrollPane(namesToPlay);
+        pickExercise.setOpaque(false);
 
+        pickExercise.getViewport().getView().setBackground(lightColor);
+        pickExercise.getViewport().getView().setFont(new Font("Arial",Font.BOLD,14));
+
+        scrollEditor(pickExercise);
+
+
+//        label.setBackground(lightColor);
+//        label.setFont(new Font("Arial",Font.BOLD,14));
+//        label.setBorder(new LineBorder(lightColor));
         playPanel.add(pickExercise);
         PlaySelectedButton play = new PlaySelectedButton(this, playPanel);
         playPanel.setBackground(backgroundColor);
