@@ -193,6 +193,7 @@ public class WorkOutAppUI extends JFrame {
         tabbedPane.addTab("T", null, playExercisePanel(), null);
         add(tabbedPane,  BorderLayout.CENTER);
         tabbedPane.setBackground(lightColor);
+        tabbedPane.setForeground(backgroundColor);
         tabbedPane.setSelectedIndex(i);
 
     }
@@ -467,7 +468,7 @@ public class WorkOutAppUI extends JFrame {
         setsTotal = first.getSets();
         exercisePlayer = new JDialog();
         JPanel layoutManager = new JPanel();
-        layoutManager.setLayout(new BoxLayout(layoutManager, BoxLayout.X_AXIS));
+        layoutManager.setLayout(new BoxLayout(layoutManager, BoxLayout.Y_AXIS));
         playerPanel = new JPanel();
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
         layoutManager.add(playerPanel);
@@ -480,8 +481,8 @@ public class WorkOutAppUI extends JFrame {
         buttonPane.setBackground(backgroundColor);
         layoutManager.add(buttonPane);
         exercisePlayer.add(layoutManager);
+        exercisePlayer.setSize(550,200);
 
-        exercisePlayer.pack();
         exercisePlayer.setVisible(true);
         exercisePlayer.setLocationRelativeTo(null);
         exercisePlayer.setBackground(backgroundColor);

@@ -51,6 +51,7 @@ public class NextButton extends Button {
             playNextExerciseSet(parent, setsDone, currentExercise);
         }
 
+        parent.getExercisePlayer().setMinimumSize(parent.getExercisePlayer().getSize());
         parent.getExercisePlayer().pack();
 
     }
@@ -64,7 +65,7 @@ public class NextButton extends Button {
         parent.increaseExercisesDone();
         setsTotal = currentExercise.getSets();
         currentPanel = parent.exerciseHelper(currentExercise, setsDone);
-        parent.getPlayerPanel().add(currentPanel, 0);
+        parent.getPlayerPanel().add(currentPanel);
         return setsTotal;
     }
 
@@ -75,7 +76,7 @@ public class NextButton extends Button {
         parent.resetSetsTotal(currentExercise.getSets());
         currentPanel = parent.exerciseHelper(currentExercise, setsDone);
         parent.increaseSetsDone();
-        parent.getPlayerPanel().add(currentPanel, 0);
+        parent.getPlayerPanel().add(currentPanel);
         ps.addCompletedReps(currentExercise.getReps());
     }
 

@@ -24,23 +24,26 @@ public class AddWorkOutToListButton extends Button {
     }
 
     // MODIFIES: parent
-    // EFFECT: adds workout to the list of workouts
+    // EFFECT: adds workout to the list of workouts if the name is not blank
+    //        otherwise do nothing
     @Override
     public void performAction(WorkOutAppUI parent) {
         WorkOutAppUI workOutAppUI = parent;
-        AllWorkOutData data = workOutAppUI.getData();
-        ArrayList<String> allExercisesNames = new ArrayList<>();
-        for (Object e : data.getExercises()) {
-            Exercise e1 = (Exercise) e;
-            String currName = e1.getName();
-            allExercisesNames.add(currName);
+        String name = parent.getWorkOutNameToAdd().getText();
+        if (!name.equals("")) {
+            AllWorkOutData data = workOutAppUI.getData();
+            ArrayList<String> allExercisesNames = new ArrayList<>();
+            for (Object e : data.getExercises()) {
+                Exercise e1 = (Exercise) e;
+                String currName = e1.getName();
+                allExercisesNames.add(currName);
+            }
+            String[] str = new String[allExercisesNames.size()];
+            JList<String> names = new JList<String>(allExercisesNames.toArray(str));
+            parent.exerciseSelectorPane(names);
+            WorkOut workOutToAdd = new WorkOut(name);
+            data.getWorkouts().add(workOutToAdd);
         }
-        String[] str = new String[allExercisesNames.size()];
-        JList<String> names = new JList<String>(allExercisesNames.toArray(str));
-        parent.exerciseSelectorPane(names);
-        WorkOut workOutToAdd = new WorkOut(parent.getWorkOutNameToAdd().getText());
-        data.getWorkouts().add(workOutToAdd);
-
 
     }
 }
