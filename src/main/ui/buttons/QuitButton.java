@@ -1,5 +1,7 @@
 package ui.buttons;
 
+import model.EventLog;
+import ui.LogPrinter;
 import ui.WorkOutAppUI;
 
 import javax.swing.*;
@@ -24,7 +26,10 @@ public class QuitButton extends Button {
     // EFFECT: quits app
     @Override
     public void performAction(WorkOutAppUI parent) {
+        LogPrinter lp = new LogPrinter();
+        lp.printLog(EventLog.getInstance());
         System.exit(0);
+
 
     }
 

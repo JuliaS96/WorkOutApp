@@ -47,6 +47,7 @@ public class NextButton extends Button {
             currentExercise = (Exercise) currentWorkout.getExercises().get(exercisesDone);
             playNextSet(parent, setsDone, ps, currentExercise);
         } else {
+
             parent.resetSetsDone();
             currentExercise = (Exercise) currentWorkout.getExercises().get(exercisesDone);
             playNextExerciseSet(parent, setsDone, currentExercise);
@@ -67,6 +68,7 @@ public class NextButton extends Button {
         setsTotal = currentExercise.getSets();
         currentPanel = parent.exerciseHelper(currentExercise, setsDone);
         parent.getPlayerPanel().add(currentPanel);
+        parent.getData().getPersonStats().addCompletedReps(currentExercise.getReps());
         return setsTotal;
     }
 
