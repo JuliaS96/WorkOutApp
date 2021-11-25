@@ -549,7 +549,7 @@ public class WorkOutAppUI extends JFrame {
     public JPanel exerciseHelper(Exercise exercise, int i) {
         JPanel performingPanel = new JPanel();
         performingPanel.setLayout(new BoxLayout(performingPanel, BoxLayout.Y_AXIS));
-        String sets = i + " sets done. " + exercise.getSets() + " sets left.";
+        String sets = i + " sets done. " + (exercise.getSets() - i) + " sets left.";
         JLabel name = new JLabel("Now performing " + exercise.getName() + ".");
         JLabel difficulty = new JLabel("This exercise is " + exercise.exerciseDifficulty() + "!");
         JLabel reps = new JLabel("Perform " + exercise.getReps() + " reps of " + exercise.getName() + ".");

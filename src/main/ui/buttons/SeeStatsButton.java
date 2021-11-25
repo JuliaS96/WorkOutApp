@@ -4,6 +4,7 @@ import model.PersonStats;
 import ui.WorkOutAppUI;
 import javax.swing.*;
 
+// button that goes to stats pane
 public class SeeStatsButton extends Button {
     private static final int WIDTH = 600;
     private static final int HEIGHT = 800;

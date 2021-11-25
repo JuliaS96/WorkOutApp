@@ -4,6 +4,7 @@ import ui.WorkOutAppUI;
 
 import javax.swing.*;
 
+// button that closes pane when workout has been added and displays message
 public class ExerciseSelectorDoneButton extends Button {
 
     // EFFECTS: creates a new ExerciseSelectorDoneButton and adds it to parent

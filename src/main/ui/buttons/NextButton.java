@@ -8,6 +8,7 @@ import ui.WorkOutAppUI;
 import javax.swing.*;
 import java.awt.*;
 
+// button that goes through workout
 public class NextButton extends Button {
 
     // EFFECTS: creates a new NextButton and adds it to parent

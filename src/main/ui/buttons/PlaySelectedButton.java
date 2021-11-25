@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+// button that initializes the workout pane with current workout
 public class PlaySelectedButton extends Button {
 
     // EFFECTS: creates a new PlaySelectedButton and adds it to parent

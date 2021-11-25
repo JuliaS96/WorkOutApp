@@ -4,6 +4,7 @@ import ui.WorkOutAppUI;
 
 import javax.swing.*;
 
+// button that saves app progress
 public class SaveButton extends Button {
     private static final int WIDTH = 60;
     private static final int HEIGHT = 80;

@@ -4,6 +4,7 @@ import ui.WorkOutAppUI;
 
 import javax.swing.*;
 
+// button that quits workout
 public class QuitWorkOut extends Button {
 
     // EFFECTS: creates a new QuitWorkOut and adds it to parent

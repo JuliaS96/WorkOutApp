@@ -8,6 +8,7 @@ import ui.WorkOutAppUI;
 import javax.swing.*;
 import java.util.ArrayList;
 
+// button that adds workout to the list of workouts
 public class AddWorkOutToListButton extends Button {
 
     // EFFECTS: creates a new AddWorkOutToListButton and adds it to parent

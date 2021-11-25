@@ -6,7 +6,7 @@ import ui.WorkOutAppUI;
 
 import javax.swing.*;
 
-
+// button that adds exercise to workout
 public class AddExerciseButton extends Button {
 
     // EFFECTS: creates a new AddExerciseButton and adds it to parent

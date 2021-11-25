@@ -4,6 +4,7 @@ import ui.WorkOutAppUI;
 
 import javax.swing.*;
 
+// button that goes to list of workouts pane
 public class DisplayAllWorkoutsButton extends Button {
     private static final int WIDTH = 60;
     private static final int HEIGHT = 80;
