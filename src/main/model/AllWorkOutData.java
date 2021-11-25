@@ -43,16 +43,32 @@ public class AllWorkOutData implements Writeable {
     }
 
     // MODIFIES: this
-    // EFFECTS: updates personal stats
+    // EFFECTS: updates workout list
     public void updateWO(ArrayList<WorkOut> workOutList) {
         allWorkouts = workOutList;
     }
 
+    // MODIFIES: this
+    // EFFECTS: updates workout list
+    public void updateWO(WorkOut workOut) {
+        allWorkouts.add(workOut);
+        EventLog.getInstance().logEvent(new Event("A workout named "
+                + workOut.getWorkOutName() + " was added to your workout list."));
+    }
+
 
     // MODIFIES: this
-    // EFFECTS: updates personal stats
+    // EFFECTS: updates workout list
     public void updateEx(ArrayList<Exercise> exerciseList) {
         allExercises = exerciseList;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates exercise list
+    public void updateEx(Exercise exercise) {
+        allExercises.add(exercise);
+        EventLog.getInstance().logEvent(new Event("An exercise named "
+                + exercise.getName() + " was added to your exercise list."));
     }
 
     @Override

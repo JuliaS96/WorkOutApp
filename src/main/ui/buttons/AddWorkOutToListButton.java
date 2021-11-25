@@ -43,7 +43,7 @@ public class AddWorkOutToListButton extends Button {
             JList<String> names = new JList<String>(allExercisesNames.toArray(str));
             parent.exerciseSelectorPane(names);
             WorkOut workOutToAdd = new WorkOut(name);
-            data.getWorkouts().add(workOutToAdd);
+            data.updateWO(workOutToAdd);
         }
 
     }

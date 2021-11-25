@@ -27,7 +27,7 @@ public class PersonStats implements Writeable {
     // EFFECTS: adds i reps to completed reps
     public void addCompletedReps(int reps) {
         completedReps = completedReps + reps;
-        EventLog.getInstance().logEvent(new Event(reps + " reps added to your stats."));
+        EventLog.getInstance().logEvent(new Event(reps + " reps wew added to your stats."));
     }
 
     // EFFECTS: returns completed workouts

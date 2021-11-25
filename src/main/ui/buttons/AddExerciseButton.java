@@ -35,7 +35,7 @@ public class AddExerciseButton extends Button {
             int sets = (int) workOutAppUI.getModelSets().getValue();
             Exercise exercise = new Exercise(name, description, reps, sets);
             AllWorkOutData data = workOutAppUI.getData();
-            data.getExercises().add(exercise);
+            data.updateEx(exercise);
             System.out.println("done");
             JOptionPane box = new JOptionPane();
             box.setBackground(parent.getBackgroundColor());
