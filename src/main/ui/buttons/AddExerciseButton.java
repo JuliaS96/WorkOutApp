@@ -36,7 +36,6 @@ public class AddExerciseButton extends Button {
             Exercise exercise = new Exercise(name, description, reps, sets);
             AllWorkOutData data = workOutAppUI.getData();
             data.updateEx(exercise);
-            System.out.println("done");
             JOptionPane box = new JOptionPane();
             box.setBackground(parent.getBackgroundColor());
             box.showMessageDialog(parent, "Exercise added.", "Notification", JOptionPane.PLAIN_MESSAGE);
