@@ -8,7 +8,6 @@ import javax.swing.*;
 public class SeeStatsButton extends Button {
     private static final int WIDTH = 600;
     private static final int HEIGHT = 800;
-    private PersonStats personStats;
 
     // EFFECTS: creates a new SeeStatsButton and adds it to parent
     public SeeStatsButton(WorkOutAppUI workOutAppUI, JComponent parent) {

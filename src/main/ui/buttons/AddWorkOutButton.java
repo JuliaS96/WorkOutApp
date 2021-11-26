@@ -6,8 +6,6 @@ import javax.swing.*;
 
 // button that goes to add new workout pane
 public class AddWorkOutButton extends Button {
-    private static final int WIDTH = 60;
-    private static final int HEIGHT = 80;
 
     // EFFECTS: creates a new AddWorkOutButton and adds it to parent
     public AddWorkOutButton(WorkOutAppUI workOutAppUI, JComponent parent) {

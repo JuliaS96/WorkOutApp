@@ -30,7 +30,6 @@ public class QuitButton extends Button {
         lp.printLog(EventLog.getInstance());
         System.exit(0);
 
-
     }
 
 

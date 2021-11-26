@@ -6,8 +6,6 @@ import javax.swing.*;
 
 // button that goes to list of exercises pane
 public class DisplayAllExercisesButton extends Button {
-    private static final int WIDTH = 60;
-    private static final int HEIGHT = 80;
 
 
     // EFFECTS: creates a new DisplayAllExercisesButton and adds it to parent

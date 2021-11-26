@@ -33,6 +33,9 @@ public class WorkOutAppUI extends JFrame {
     private static final int HEIGHT = 600;
     private static final String JSON_STORE = "./data/workoutData.json";
     private Exercise defaultExercise;
+    private Exercise crunches;
+    private Exercise sitUps;
+    private Exercise squats;
     private WorkOut fullBody;
     private Scanner input;
     private Color backgroundColor = new Color(122, 158, 159, 255);
@@ -56,6 +59,7 @@ public class WorkOutAppUI extends JFrame {
     private SaveButton saveButton;
     private LoadButton loadButton;
     private AddWorkOutButton addWorkOutButton;
+    private QuitButton quitButton;
     private JTabbedPane tabbedPane;
     private JTextField nameField;
     private JTextField descriptionField;
@@ -116,15 +120,15 @@ public class WorkOutAppUI extends JFrame {
     // EFFECTS: initializes default exercises and workout
     private void init() {
         data = new AllWorkOutData();
-        Exercise crunches = new Exercise("Crunches",
+        crunches = new Exercise("Crunches",
                 "Lie down and sit half-way up", 4, 3);
-        Exercise sitUps = new Exercise("Sit-ups",
+        sitUps = new Exercise("Sit-ups",
                 "Lie down and sit up", 5, 3);
-        Exercise squats = new Exercise("Squats",
+        squats = new Exercise("Squats",
                 "Sit down as if there is an imaginary chair behind you",
                 4, 2);
         defaultExercise = new Exercise("Default Exercise", "Jump! Jump! Jump!", 3, 2);
-        fullBody = new WorkOut("Default Full-Body Workout");
+        fullBody = new WorkOut("Default4 Full-Body Workout");
         fullBody.addExercise(crunches);
         fullBody.addExercise(sitUps);
         fullBody.addExercise(squats);
@@ -428,7 +432,6 @@ public class WorkOutAppUI extends JFrame {
     // EFFECTS: creates the buttons in the main app area
     public void createButtons() {
         JPanel buttonArea = new JPanel();
-        QuitButton quitButton;
         buttonArea.setLayout(new GridLayout(0, 1));
         buttonArea.setSize(new Dimension(10, 0));
         add(buttonArea, BorderLayout.WEST);
