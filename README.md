@@ -112,3 +112,19 @@ A workout was added to your stats.
 
 
 Process finished with exit code 0
+
+## Phase 4: Task 3
+If I had more time to design the application, I would make the following changes:
+
+- All of my Buttons that change the display use the same code, but use a different 
+number to determine which section of the tabbed pane they will go to. I would make 
+another abstract version of Button that extends Button and implements the code in 
+the display buttons. Then those buttons would extend DisplayButton instead. 
+- I would make Exercise an interface and insert two other classes that implement it: 
+RepBased and TimeBased exercises. This would also add functionality to the app. 
+- I would add additional default exercises and workouts, so the multiplicity of the 
+associations would be higher between WorkOutAppUI and WorkOut and Exercise class.
+This would make the app more engaging, as the user would be able to use it right
+away, without needing to put in a lot of work and add exercises / workouts. 
+- I would remove the LogPrinter class and make it a method in the WorkOutAppUI, 
+since I am not planning on using it anywhere else. 
