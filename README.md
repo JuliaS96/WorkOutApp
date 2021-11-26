@@ -120,6 +120,9 @@ If I had more time to design the application, I would make the following changes
 number to determine which section of the tabbed pane they will go to. I would make 
 another abstract version of Button that extends Button and implements the code in 
 the display buttons. Then those buttons would extend DisplayButton instead. 
+- My WorkOutAppUI class has gotten extremely long and confusing. I would instead add a separate
+class for each panel to simplify it. Each screen tab would then contain the methods 
+it needs within it. Right now they are all included in the WorkOutAppUI class. 
 - I would make Exercise an interface and insert two other classes that implement it: 
 RepBased and TimeBased exercises. This would also add functionality to the app. 
 - I would add additional default exercises and workouts, so the multiplicity of the 
