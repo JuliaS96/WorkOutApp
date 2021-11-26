@@ -128,7 +128,7 @@ public class WorkOutAppUI extends JFrame {
                 "Sit down as if there is an imaginary chair behind you",
                 4, 2);
         defaultExercise = new Exercise("Default Exercise", "Jump! Jump! Jump!", 3, 2);
-        fullBody = new WorkOut("Default4 Full-Body Workout");
+        fullBody = new WorkOut("Default Full-Body Workout");
         fullBody.addExercise(crunches);
         fullBody.addExercise(sitUps);
         fullBody.addExercise(squats);
