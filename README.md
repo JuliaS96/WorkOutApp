@@ -130,4 +130,4 @@ associations would be higher between WorkOutAppUI and WorkOut and Exercise class
 This would make the app more engaging, as the user would be able to use it right
 away, without needing to put in a lot of work and add exercises / workouts. 
 - I would remove the LogPrinter class and make it a method in the WorkOutAppUI, 
-since I am not planning on using it anywhere else. 
+since I am not planning on using it anywhere else. # WorkOutApp

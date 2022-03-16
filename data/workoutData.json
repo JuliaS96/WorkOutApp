@@ -1,7 +1,7 @@
 {
     "Personal Stats": [{
-        "Reps": 0,
-        "WorkOuts": 0
+        "Reps": 16,
+        "WorkOuts": 1
     }],
     "Exercises": [
         {
@@ -21,29 +21,54 @@
             "sets": 3,
             "name": "Sit-ups",
             "description": "Lie down and sit up"
+        },
+        {
+            "reps": 3,
+            "sets": 1,
+            "name": "tests",
+            "description": "fhgvjhb"
         }
     ],
-    "WorkOuts": [{
-        "exercises": [
-            {
-                "reps": 4,
-                "sets": 3,
-                "name": "Crunches",
-                "description": "Lie down and sit half-way up"
-            },
-            {
-                "reps": 5,
-                "sets": 3,
-                "name": "Sit-ups",
-                "description": "Lie down and sit up"
-            },
-            {
-                "reps": 4,
-                "sets": 2,
-                "name": "Squats",
-                "description": "Sit down as if there is an imaginary chair behind you"
-            }
-        ],
-        "name": "Default Full-Body Workout"
-    }]
+    "WorkOuts": [
+        {
+            "exercises": [
+                {
+                    "reps": 4,
+                    "sets": 3,
+                    "name": "Crunches",
+                    "description": "Lie down and sit half-way up"
+                },
+                {
+                    "reps": 5,
+                    "sets": 3,
+                    "name": "Sit-ups",
+                    "description": "Lie down and sit up"
+                },
+                {
+                    "reps": 4,
+                    "sets": 2,
+                    "name": "Squats",
+                    "description": "Sit down as if there is an imaginary chair behind you"
+                }
+            ],
+            "name": "Default Full-Body Workout"
+        },
+        {
+            "exercises": [
+                {
+                    "reps": 4,
+                    "sets": 2,
+                    "name": "Squats",
+                    "description": "Sit down as if there is an imaginary chair behind you"
+                },
+                {
+                    "reps": 4,
+                    "sets": 2,
+                    "name": "Squats",
+                    "description": "Sit down as if there is an imaginary chair behind you"
+                }
+            ],
+            "name": "test"
+        }
+    ]
 }
